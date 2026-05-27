@@ -1,0 +1,2539 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0c0c0e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- WallFlix Premium Firebase V4 -->
+  <meta name="description" content="WallFlix Premium - HD mobile wallpapers, Firebase likes, views, comments, ratings and push notifications." />
+  <meta name="keywords" content="WallFlix, wallpapers, mobile wallpapers, Firebase wallpapers, AMOLED, anime, Morocco wallpapers" />
+  <meta property="og:title" content="WallFlix Premium" />
+  <meta property="og:description" content="Premium HD wallpapers with Firebase features." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <title>WallFlix Premium</title>
+  <!-- WallFlix V51 Clean Video Hub -->
+  <!-- WallFlix V47 Video Upload Working -->
+  <!-- WallFlix V46 Mobile Video UI Fixed -->
+  <!-- WallFlix V45 Video Wallpapers -->
+  <!-- WallFlix V44 Firestore Stable Sync -->
+  <!-- WallFlix V42 Auto Upload View Fixed -->
+  <!-- WallFlix V39 Admin Buttons Fixed -->
+  <!-- WallFlix V38 Firebase Merge Upload Fix -->
+  <!-- WallFlix V28 Smart Premium -->
+  <!-- WallFlix V26 Style Restored -->
+  <!-- WallFlix V24 Premium Search Trending Push -->
+  <!-- WallFlix V23 Mark Read Final Fix -->
+  <!-- WallFlix V22 Notification Dot Fixed -->
+  <!-- WallFlix V21 Notifications Stable -->
+  <!-- WallFlix V20 Push Fixed -->
+  <!-- WallFlix V18 Notifications Bell -->
+  <!-- WallFlix V17 Final Fix Slider Daily Auth -->
+  <!-- WallFlix V16 Slider Daily Fixed -->
+  <!-- WallFlix V15 Fix Categories Daily Login -->
+  <!-- WallFlix Premium Features V14 -->
+  <!-- WallFlix Auth Modal Fixed V13 -->
+  <!-- WallFlix Profile Verified V11 -->
+  <!-- WallFlix Admin Rated Full V10 -->
+  <!-- WallFlix Share Fixed V9 -->
+  <!-- WallFlix JS Fixed V7 -->
+  <!-- WallFlix Clean Stable V6 -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-messaging-compat.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+    :root{--bg:#0c0c0e;--card:#161619;--card2:#202025;--text:#fff;--muted:#a1a1aa;--border:#27272a;--purple:#a855f7;--purple2:#7c3aed}
+    body.light{--bg:#f6f2ff;--card:#ffffff;--card2:#eee7ff;--text:#17121f;--muted:#6b6477;--border:#e8dcff;--purple:#9333ea;--purple2:#7e22ce}
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg)!important;color:var(--text);font-family:Poppins,sans-serif;position:fixed}
+    body{transition:background .25s,color .25s}.app-bg{background:var(--bg)!important}.card-bg{background:var(--card)!important}.card2-bg{background:var(--card2)!important}.text-main{color:var(--text)!important}.text-muted{color:var(--muted)!important}.border-main{border-color:var(--border)!important}.purple-neon{color:var(--purple)!important}.bg-purple-neon{background:var(--purple)!important}.no-scrollbar::-webkit-scrollbar{display:none}.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
+    .glass{background:color-mix(in srgb,var(--card) 84%,transparent);backdrop-filter:blur(16px)}
+    .menu-open{opacity:1!important;visibility:visible!important;pointer-events:auto!important}.menu-closed{opacity:0!important;visibility:hidden!important;pointer-events:none!important}.menu-open #menu-content{transform:translateX(0)!important}.menu-closed #menu-content{transform:translateX(100%)!important}
+    .modal-panel{transform:translateY(100%)}.modal-open{display:flex!important;opacity:1!important}.modal-open .modal-panel{transform:translateY(0)}
+    .wall-card img{transition:transform .35s}.wall-card:active img{transform:scale(1.06)}
+    .toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%) translateY(20px);background:var(--card2);color:var(--text);border:1px solid var(--border);padding:10px 14px;border-radius:14px;z-index:90;font-size:12px;opacity:0;transition:.25s;box-shadow:0 10px 30px #0006}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    .rtl-icon{transform:scaleX(var(--flip,1))}html[dir=rtl] .rtl-icon{--flip:-1}.active-tab{color:var(--purple)!important}.inactive-tab{color:var(--muted)!important}
+    .select-premium{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 12px) 50%;background-size:6px 6px,6px 6px;background-repeat:no-repeat}
+    html[dir=rtl] .select-premium{background-position:18px 50%,12px 50%}
+    .file-drop{border:1px dashed color-mix(in srgb,var(--purple) 55%,var(--border));background:linear-gradient(135deg,color-mix(in srgb,var(--purple) 14%,transparent),transparent)}
+
+
+    .stat-chip{background:rgba(0,0,0,.38);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.10);border-radius:999px;padding:4px 8px;display:inline-flex;align-items:center;gap:4px}
+    .rank-fire{background:linear-gradient(135deg,var(--purple),#ec4899);box-shadow:0 8px 20px rgba(168,85,247,.32)}
+    .premium-glow{box-shadow:0 0 0 1px rgba(168,85,247,.18),0 14px 40px rgba(168,85,247,.16)}
+  
+    /* FIX: Detail modal always shows Download / Share / Back buttons */
+    #detail-modal{
+      overflow-y:auto!important;
+      overflow-x:hidden!important;
+      -webkit-overflow-scrolling:touch;
+      display:flex;
+    }
+    #detail-modal.hidden{display:none!important}
+    #detail-modal .detail-image-wrap{
+      flex:none!important;
+      height:auto!important;
+      min-height:0!important;
+    }
+    #detail-img-view{
+      width:100%!important;
+      height:60vh!important;
+      max-height:60vh!important;
+      object-fit:cover!important;
+      display:block;
+    }
+    #detail-modal .detail-content{
+      padding-bottom:120px!important;
+      margin-top:0!important;
+      flex:none!important;
+    }
+
+  
+    .admin-badge{background:linear-gradient(135deg,#f59e0b,#facc15);color:#111827;border-radius:999px;padding:2px 8px;font-size:9px;font-weight:900;display:inline-flex;align-items:center;gap:4px}
+    .admin-card{background:linear-gradient(135deg,color-mix(in srgb,var(--purple) 16%,var(--card)),var(--card));border:1px solid color-mix(in srgb,var(--purple) 38%,var(--border));box-shadow:0 14px 35px rgba(168,85,247,.12)}
+    .admin-input{width:100%;background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:12px;font-size:12px;color:var(--text);outline:none}
+    .admin-input:focus{border-color:var(--purple);box-shadow:0 0 0 1px color-mix(in srgb,var(--purple) 40%,transparent)}
+    .pill-btn{border-radius:14px;padding:11px 12px;font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:7px}
+    .top-section-title{display:flex;align-items:center;justify-content:space-between;margin:18px 0 10px}
+
+
+    /* Firebase V4 features */
+    .comment-box{max-height:220px;overflow-y:auto}
+    .comment-item{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:10px;margin-bottom:8px}
+    .rating-star{color:#f59e0b}
+    .profile-row{display:flex;align-items:center;justify-content:space-between;background:var(--card2);border:1px solid var(--border);border-radius:16px;padding:12px;margin-top:8px}
+    .push-card{background:linear-gradient(135deg,color-mix(in srgb,var(--purple) 18%,var(--card)),var(--card));border:1px solid color-mix(in srgb,var(--purple) 40%,var(--border));border-radius:22px;padding:14px}
+    .install-banner{position:fixed;left:14px;right:14px;bottom:86px;z-index:70;background:linear-gradient(135deg,color-mix(in srgb,var(--purple) 18%,var(--card)),var(--card));border:1px solid color-mix(in srgb,var(--purple) 36%,var(--border));border-radius:22px;padding:14px;display:none;align-items:center;gap:12px;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+    .install-banner.show{display:flex}
+    .page-card{background:linear-gradient(135deg,color-mix(in srgb,var(--purple) 10%,var(--card)),var(--card));border:1px solid var(--border);border-radius:24px;padding:18px}
+    .ad-box{min-height:74px;border:1px dashed color-mix(in srgb,var(--purple) 40%,var(--border));border-radius:18px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:11px;background:color-mix(in srgb,var(--card) 85%,transparent)}
+  
+    /* SAFE Premium Rating only */
+    .rating-star{
+      width:52px!important;height:52px!important;border-radius:16px!important;
+      border:1px solid color-mix(in srgb,var(--purple) 34%,var(--border))!important;
+      background:linear-gradient(135deg,color-mix(in srgb,var(--purple) 12%,var(--card)),var(--card2))!important;
+      display:flex!important;align-items:center!important;justify-content:center!important;
+      color:#f59e0b!important;transition:.25s!important;font-size:22px!important;
+    }
+    .rating-star.active,.rating-star:active{
+      transform:translateY(-3px) scale(1.04)!important;
+      background:linear-gradient(135deg,var(--purple),var(--purple2))!important;
+      color:#fff!important;box-shadow:0 14px 28px rgba(168,85,247,.38)!important;
+    }
+
+  
+    /* V10 Admin Persistent + Top Rated + Premium Rating */
+    .admin-secret-hidden{display:none!important}
+    .admin-unlocked-card{
+      display:none;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      background:linear-gradient(135deg,color-mix(in srgb,var(--purple) 16%,var(--card)),var(--card2));
+      border:1px solid color-mix(in srgb,var(--purple) 35%,var(--border));
+      border-radius:18px;
+      padding:12px;
+      margin-bottom:10px;
+    }
+    .admin-unlocked-card.show{display:flex}
+    .rating-summary-premium{
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      color:#f59e0b;font-size:12px;font-weight:900;margin-bottom:12px;
+      background:linear-gradient(135deg,color-mix(in srgb,var(--purple) 14%,var(--card)),var(--card2));
+      border:1px solid color-mix(in srgb,var(--purple) 32%,var(--border));
+      border-radius:16px;padding:10px 12px;
+    }
+    .rating-summary-premium small{color:var(--muted);font-weight:600}
+    .detail-rating-pill{
+      display:inline-flex;align-items:center;gap:6px;
+      color:#f59e0b;background:rgba(245,158,11,.10);
+      border:1px solid rgba(245,158,11,.22);
+      border-radius:999px;padding:4px 9px;font-size:10px;font-weight:900;margin-bottom:10px;
+    }
+    .top-rated-card{
+      position:relative;min-width:132px;height:176px;border-radius:20px;overflow:hidden;
+      background:var(--card);border:1px solid color-mix(in srgb,var(--purple) 24%,var(--border));
+      box-shadow:0 14px 40px rgba(168,85,247,.14);flex-shrink:0;
+    }
+    .top-rated-card img{width:100%;height:100%;object-fit:cover}
+    .top-rated-card .shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88),transparent)}
+    .top-rated-card .rank{
+      position:absolute;top:8px;left:8px;min-width:28px;height:26px;border-radius:10px;
+      background:linear-gradient(135deg,#f59e0b,var(--purple));color:#fff;font-size:10px;font-weight:900;
+      display:flex;align-items:center;justify-content:center;gap:3px;padding:0 7px;
+    }
+    .top-rated-card .info{position:absolute;left:10px;right:10px;bottom:10px}
+    .top-rated-card h4{font-size:11px;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .top-rated-card p{font-size:10px;color:#d4d4d8;margin-top:2px}
+
+  
+    /* V14 Premium Features: Recently Viewed + Related + Collections + Profile */
+    .vf-card{position:relative;min-width:132px;height:176px;border-radius:20px;overflow:hidden;background:var(--card);border:1px solid color-mix(in srgb,var(--purple) 22%,var(--border));flex-shrink:0;box-shadow:0 14px 34px rgba(0,0,0,.18)}
+    .vf-card img{width:100%;height:100%;object-fit:cover}.vf-card .shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.86),transparent)}.vf-card .info{position:absolute;left:10px;right:10px;bottom:10px}.vf-card h4{font-size:11px;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.vf-card p{font-size:10px;color:#d4d4d8;margin-top:2px}
+    .collection-card{position:relative;height:120px;border-radius:22px;overflow:hidden;border:1px solid color-mix(in srgb,var(--purple) 25%,var(--border));background:linear-gradient(135deg,color-mix(in srgb,var(--purple) 20%,var(--card)),var(--card2));box-shadow:0 14px 34px rgba(0,0,0,.18)}
+    .collection-icon{width:42px;height:42px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:rgba(168,85,247,.20);color:var(--purple);font-size:18px}
+    .featured-badge{display:inline-flex;align-items:center;gap:4px;border-radius:999px;background:linear-gradient(135deg,#f59e0b,var(--purple));color:white;padding:3px 8px;font-size:9px;font-weight:900;box-shadow:0 8px 20px rgba(168,85,247,.25)}
+    .avatar-action{display:inline-flex;align-items:center;gap:6px;border-radius:999px;background:rgba(168,85,247,.16);border:1px solid rgba(168,85,247,.30);color:var(--purple);font-size:10px;font-weight:800;padding:6px 10px;margin-top:10px}
+
+  
+    /* V17 hard fixes */
+    #loginFormBox.force-hidden{display:none!important}
+    #logoutBtnAuth.force-show{display:block!important}
+    #slider-bg{background-size:cover!important;background-position:center!important;opacity:1!important}
+
+  
+    /* V20 Push fixed */
+    .push-status-ok{color:#22c55e!important}
+    .push-status-warn{color:#f59e0b!important}
+
+  
+    /* V22 notification dot only */
+    #notif-dot{
+      width:10px!important;height:10px!important;
+      background:var(--purple)!important;border-radius:999px!important;
+      box-shadow:0 0 12px rgba(168,85,247,.85)!important;
+    }
+
+  
+    /* V23 notification styles */
+    .notif-card{background:linear-gradient(135deg,color-mix(in srgb,var(--purple) 12%,var(--card)),var(--card2));border:1px solid color-mix(in srgb,var(--purple) 28%,var(--border));border-radius:18px;padding:12px;display:flex;gap:10px;align-items:flex-start;box-shadow:0 12px 30px rgba(0,0,0,.16)}
+    .notif-icon{width:38px;height:38px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:rgba(168,85,247,.18);color:var(--purple);flex:none}
+    .notif-title{font-size:12px;font-weight:900;color:var(--text)}
+    .notif-text{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.45}
+    .notif-time{font-size:9px;color:var(--muted);margin-top:5px}
+    .notif-empty{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;text-align:center;color:var(--muted);font-size:12px}
+    #notif-dot{width:10px!important;height:10px!important;background:var(--purple)!important;border-radius:999px!important;box-shadow:0 0 12px rgba(168,85,247,.85)!important}
+
+  
+    /* V24 Premium Search + Trending + Push */
+    .search-chip{
+      flex:none;border:1px solid color-mix(in srgb,var(--purple) 25%,var(--border));
+      background:linear-gradient(135deg,color-mix(in srgb,var(--purple) 10%,var(--card)),var(--card));
+      color:var(--muted);border-radius:999px;padding:8px 12px;font-size:11px;font-weight:800;
+      display:inline-flex;align-items:center;gap:6px;transition:.2s
+    }
+    .search-chip.active,.search-chip:active{
+      background:linear-gradient(135deg,var(--purple),var(--purple2));color:white;
+      box-shadow:0 10px 28px rgba(168,85,247,.28);transform:translateY(-1px)
+    }
+    .search-result-label{
+      display:none;align-items:center;justify-content:space-between;margin:10px 0 8px;
+      color:var(--muted);font-size:11px
+    }
+    .search-result-label.show{display:flex}
+    .empty-premium{
+      grid-column:1/-1;border:1px solid color-mix(in srgb,var(--purple) 24%,var(--border));
+      border-radius:22px;background:linear-gradient(135deg,color-mix(in srgb,var(--purple) 10%,var(--card)),var(--card));
+      padding:24px;text-align:center;color:var(--muted);font-size:12px
+    }
+    .premium-badge-mini{
+      display:inline-flex;align-items:center;gap:4px;padding:3px 7px;border-radius:999px;
+      background:rgba(168,85,247,.16);border:1px solid rgba(168,85,247,.25);
+      color:var(--purple);font-size:9px;font-weight:900
+    }
+
+  
+    /* V26 safe premium additions - no home layout changes */
+    .quality-btn{border:1px solid color-mix(in srgb,var(--purple) 30%,var(--border));background:var(--card);border-radius:16px;padding:10px;font-size:11px;font-weight:900;color:var(--text);display:flex;align-items:center;justify-content:center;gap:6px}
+    .quality-btn:active{background:linear-gradient(135deg,var(--purple),var(--purple2));color:white}
+    .comment-actions{display:flex;gap:10px;margin-top:8px;font-size:10px;color:var(--muted)}
+    .reply-box{margin-left:18px;margin-top:8px;padding-left:10px;border-left:2px solid rgba(168,85,247,.35)}
+
+  
+    /* V42 Auto Upload View Fixed */
+    .admin-wall-row{cursor:pointer;transition:.2s}
+    .admin-wall-row.selected{border-color:var(--purple)!important;box-shadow:0 0 0 1px color-mix(in srgb,var(--purple) 55%,transparent),0 12px 30px rgba(168,85,247,.18)}
+
+  
+    /* V44 Firestore Stable Sync */
+    .admin-wall-row{cursor:pointer;transition:.2s}
+    .admin-wall-row.selected{border-color:var(--purple)!important;box-shadow:0 0 0 1px color-mix(in srgb,var(--purple) 55%,transparent),0 12px 30px rgba(168,85,247,.18)}
+    .firebase-sync-badge{display:inline-flex;align-items:center;gap:5px;border-radius:999px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.28);color:#22c55e;font-size:9px;font-weight:900;padding:4px 8px}
+
+  
+    /* V46 Mobile Video UI Fixed */
+    @media (min-width: 769px){
+      body::before{
+        content:"WallFlix is optimized for mobile phones";
+        position:fixed;inset:0;z-index:999999;background:#0c0c0e;color:white;
+        display:flex;align-items:center;justify-content:center;text-align:center;
+        font-family:Poppins,sans-serif;font-weight:800;padding:30px;
+      }
+    }
+    #upload-modal .file-drop{padding:18px!important}
+    .v45-upload-choice,.v46-upload-choice{
+      display:grid!important;
+      grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+      gap:10px!important;
+      width:100%!important;
+      margin-top:12px!important;
+      align-items:stretch!important;
+    }
+    .v45-upload-choice label,.v46-upload-choice label{
+      min-width:0!important;width:100%!important;height:54px!important;
+      display:flex!important;align-items:center!important;justify-content:center!important;
+      gap:7px!important;border-radius:16px!important;padding:0 8px!important;
+      font-size:12px!important;font-weight:900!important;white-space:nowrap!important;
+      overflow:hidden!important;text-overflow:ellipsis!important;
+      background:linear-gradient(135deg,var(--purple),var(--purple2))!important;
+      color:#fff!important;box-shadow:0 12px 28px rgba(168,85,247,.25)!important;
+    }
+    .v45-upload-choice label i,.v46-upload-choice label i{font-size:15px!important;flex:none!important}
+    .v45-upload-actions,.v46-upload-actions{
+      display:grid!important;
+      grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+      gap:10px!important;width:100%!important;
+    }
+    .v45-upload-actions button,.v46-upload-actions button{
+      min-width:0!important;width:100%!important;height:58px!important;
+      border-radius:16px!important;padding:0 8px!important;
+      font-size:12px!important;font-weight:900!important;line-height:1.1!important;
+      white-space:normal!important;text-align:center!important;
+      display:flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;
+      background:linear-gradient(135deg,var(--purple),var(--purple2))!important;
+      color:#fff!important;
+    }
+    .v45-upload-actions button i,.v46-upload-actions button i{font-size:15px!important;flex:none!important}
+    #uploadPreview,#uploadVideoPreview{
+      width:100%!important;height:150px!important;object-fit:cover!important;
+      border-radius:18px!important;margin-top:14px!important;border:1px solid var(--border)!important;
+      background:#050505!important;
+    }
+    #uploadVideoPreview{display:none}
+    #upload-modal input,#upload-modal select{font-size:13px!important}
+    #upload-modal .modal-panel{padding-left:20px!important;padding-right:20px!important}
+
+  
+    /* V47 Video Upload Working */
+    .video-badge-v47{position:absolute;top:8px;right:8px;width:30px;height:30px;border-radius:12px;background:rgba(0,0,0,.58);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;color:white;z-index:4}
+    .wall-card video{width:100%!important;height:100%!important;object-fit:cover!important;background:#000}
+.v50-video-card{height:214px}.v50-video-row{gap:8px}.v50-cat-grid{gap:8px}}
+
+
+/* V51 Clean Video Hub */
+.v51-video-bar{display:flex;gap:10px;overflow-x:auto;padding:8px 0 4px}.v51-video-bar::-webkit-scrollbar{display:none}
+.v51-chip{flex:none;border:1px solid color-mix(in srgb,var(--purple) 28%,var(--border));background:var(--card);color:var(--muted);border-radius:16px;padding:11px 14px;font-size:12px;font-weight:900;display:flex;align-items:center;gap:7px}
+.v51-chip.active{background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff;box-shadow:0 12px 28px rgba(168,85,247,.30)}
+.v51-title{display:flex;align-items:center;justify-content:space-between;margin:18px 0 12px}.v51-title h3{font-size:17px;font-weight:900;color:var(--text)}.v51-title button{font-size:13px;color:var(--purple);font-weight:800}
+.v51-cat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.v51-cat-card{position:relative;height:126px;border-radius:18px;overflow:hidden;background:var(--card);border:1px solid color-mix(in srgb,var(--purple) 22%,var(--border));box-shadow:0 12px 28px rgba(0,0,0,.18)}
+.v51-cat-card img,.v51-video-card img,.v51-list-thumb img{width:100%;height:100%;object-fit:cover;background:#09090b}
+.v51-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.90),rgba(0,0,0,.18),rgba(0,0,0,.04))}
+.v51-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:42px;height:42px;border-radius:50%;background:rgba(0,0,0,.52);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;color:white;z-index:3}
+.v51-cat-info{position:absolute;left:9px;right:9px;bottom:9px;z-index:4}.v51-cat-info h4{font-size:12px;font-weight:900;color:white;line-height:1.12}.v51-cat-info p{font-size:10px;color:#e4e4e7;margin-top:2px}
+.v51-video-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.v51-video-card{position:relative;height:238px;border-radius:18px;overflow:hidden;background:var(--card);border:1px solid color-mix(in srgb,var(--purple) 22%,var(--border));box-shadow:0 12px 30px rgba(0,0,0,.18)}
+.v51-duration{position:absolute;left:8px;bottom:72px;background:rgba(0,0,0,.65);color:white;font-size:10px;font-weight:900;border-radius:8px;padding:2px 6px;z-index:4}
+.v51-video-info{position:absolute;left:9px;right:9px;bottom:9px;z-index:4}.v51-video-info h4{font-size:12px;font-weight:900;color:white;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.v51-video-info .cat{font-size:10px;color:#f59e0b;margin-top:2px}.v51-video-info .stats{display:flex;gap:9px;font-size:10px;color:#d4d4d8;margin-top:7px}
+.v51-down{position:absolute;right:8px;bottom:10px;width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--purple2));color:white;z-index:5;display:flex;align-items:center;justify-content:center}
+.v51-list-card{display:grid;grid-template-columns:116px 1fr 42px;gap:12px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:8px;margin-bottom:10px}.v51-list-thumb{height:80px;border-radius:14px;overflow:hidden;position:relative;background:#09090b}
+.v51-detail video{width:100%;height:245px;object-fit:cover;background:#000;border-radius:18px;border:1px solid var(--border)}
+.v51-quality{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}.v51-quality button{border:1px solid var(--border);border-radius:16px;background:var(--card);color:var(--text);padding:12px 6px;font-size:11px;font-weight:900}.v51-quality button.active{background:linear-gradient(135deg,var(--purple),var(--purple2));color:white}
+@media(max-width:380px){.v51-cat-card{height:112px}.v51-video-card{height:214px}.v51-video-row{gap:8px}.v51-cat-grid{gap:8px}}
+
+</style>
+</head>
+<body class="flex flex-col h-full w-full select-none app-bg">
+  <header class="flex justify-between items-center px-4 pb-2 pt-4 app-bg z-30 border-b border-main">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 bg-purple-neon rounded-lg flex items-center justify-center font-bold text-lg shadow-lg shadow-purple-500/30">W</div>
+      <span class="text-lg font-bold tracking-wide text-main">Wall<span class="purple-neon">Flix</span></span>
+    </div>
+    <div class="flex items-center gap-4">
+      <button onclick="openNotifications()" class="relative p-1 text-muted hover:text-main transition"><i class="far fa-bell text-xl"></i><span id="notif-dot" class="absolute top-1 right-1 w-2 h-2 bg-purple-neon rounded-full hidden"></span></button>
+      <button onclick="toggleTheme()" class="p-1 text-muted hover:text-main transition"><i id="top-theme-icon" class="far fa-moon text-xl"></i></button>
+    </div>
+  </header>
+
+  <div class="px-4 py-2 app-bg z-20">
+    <div class="relative">
+      <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-muted"></i>
+      <input id="searchInput" oninput="searchWallpapers()" type="text" data-i18n-placeholder="search" placeholder="Search wallpapers or videos..." class="w-full card-bg py-3 pl-11 pr-12 rounded-xl text-sm text-main placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-purple-500" />
+      <button onclick="toggleColorFilters()" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 card2-bg rounded-lg flex items-center justify-center text-muted text-xs"><i class="fas fa-sliders-h"></i></button>
+      <div id="searchSuggestions" class="suggestion-box"></div>
+    </div>
+    <div id="colorFilterRow" class="color-filter-row hidden"></div>
+
+    <div id="searchResultLabel" class="search-result-label">
+      <span><i class="fas fa-magnifying-glass text-purple-400 mr-1"></i><span id="searchResultText">Premium search ready</span></span>
+      <button onclick="clearPremiumSearch()" class="text-purple-400 font-bold">Clear</button>
+    </div>
+    <div id="searchChips" class="flex gap-2 overflow-x-auto no-scrollbar mt-2 pb-1"></div>
+  </div>
+
+  <main id="home-page" class="page flex-1 overflow-y-auto no-scrollbar px-4 pb-24 app-bg">
+    <section class="relative h-48 rounded-2xl overflow-hidden my-3 group">
+      <div id="slider-bg" class="absolute inset-0 bg-cover bg-center transition-all duration-700"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+      <div class="absolute bottom-4 left-4 right-4">
+        <span class="text-[10px] bg-amber-500/20 text-amber-400 font-bold px-2 py-0.5 rounded uppercase tracking-wider"><i class="fas fa-crown text-[8px] mr-1"></i><span data-i18n="editors">Editor's Choice</span></span>
+        <h2 id="slider-title" class="text-lg font-bold mt-1 text-white">Loading...</h2>
+        <p id="slider-desc" class="text-xs text-zinc-300 mb-2">Please wait</p>
+        <button onclick="openDetailModal('slider')" class="bg-purple-neon text-white text-xs font-semibold px-4 py-2 rounded-xl shadow-lg shadow-purple-500/20" data-i18n="viewWallpaper">View Wallpaper</button>
+      </div>
+      <div class="absolute bottom-4 right-4 flex gap-1" id="slider-dots"></div>
+      <div class="absolute bottom-0 left-0 h-[3px] bg-purple-neon transition-all duration-100 ease-linear" id="slider-progress" style="width:0%"></div>
+    </section>
+
+    <section class="mb-6">
+      <div class="flex justify-between items-center mb-3"><h3 class="font-bold text-sm text-main" data-i18n="trending">Trending Now</h3><button onclick="switchTab('explore')" class="text-xs text-muted" data-i18n="viewAll">View all</button></div>
+      <div id="trendingList" class="flex gap-3 overflow-x-auto no-scrollbar"></div>
+    </section>
+
+
+    <section class="mb-6">
+      <div class="top-section-title"><h3 class="font-bold text-sm text-main"><i class="fas fa-heart text-pink-500 mr-1"></i> Most Liked</h3><button onclick="switchTab('explore')" class="text-xs text-muted">View all</button></div>
+      <div id="mostLikedList" class="flex gap-3 overflow-x-auto no-scrollbar"></div>
+    </section>
+
+    <section class="mb-6">
+      <div class="top-section-title"><h3 class="font-bold text-sm text-main"><i class="fas fa-download text-purple-400 mr-1"></i> Most Downloaded</h3><button onclick="switchTab('explore')" class="text-xs text-muted">View all</button></div>
+      <div id="mostDownloadedList" class="flex gap-3 overflow-x-auto no-scrollbar"></div>
+    </section>
+
+
+    <section class="mb-6">
+      <div class="top-section-title">
+        <h3 class="font-bold text-sm text-main"><i class="fas fa-star text-amber-400 mr-1"></i> Top Rated</h3>
+        <button onclick="switchTab('explore')" class="text-xs text-muted">View all</button>
+      </div>
+      <div id="topRatedList" class="flex gap-3 overflow-x-auto no-scrollbar"></div>
+    </section>
+
+    <section class="mb-6">
+      <div class="top-section-title">
+        <h3 class="font-bold text-sm text-main"><i class="fas fa-sparkles text-purple-400 mr-1"></i> New Wallpapers</h3>
+        <button onclick="switchTab('explore')" class="text-xs text-muted">View all</button>
+      </div>
+      <div id="newWallpapersList" class="flex gap-3 overflow-x-auto no-scrollbar"></div>
+    </section>
+<section class="mb-6">
+      <div class="top-section-title">
+        <h3 class="font-bold text-sm text-main"><i class="fas fa-clock-rotate-left text-cyan-400 mr-1"></i> Recently Viewed</h3>
+        <button onclick="clearRecentlyViewed()" class="text-xs text-muted">Clear</button>
+      </div>
+      <div id="recentViewedList" class="flex gap-3 overflow-x-auto no-scrollbar"></div>
+    </section>
+
+    <section class="mb-6">
+      <div class="flex justify-between items-center mb-3"><h3 class="font-bold text-sm text-main" data-i18n="categories">Categories</h3><button onclick="switchTab('explore')" class="text-xs text-muted" data-i18n="viewAll">View all</button></div>
+      <div id="homeCats" class="grid grid-cols-4 gap-2"></div>
+    </section>
+
+    <section>
+      <h3 class="font-bold text-sm mb-3 text-main" data-i18n="daily">Daily Wallpaper</h3>
+      <div class="relative h-44 rounded-2xl overflow-hidden cursor-pointer" onclick="openDetailModal('daily')">
+        <img id="daily-img" src="" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-black/45 flex flex-col justify-end p-4">
+          <div class="text-xs text-zinc-300" id="daily-timer">08h : 34m : 12s</div>
+          <button class="mt-2 w-full bg-purple-neon text-white text-xs font-semibold py-3 rounded-xl pointer-events-none" data-i18n="viewToday">View Today's Wallpaper</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <main id="explore-page" class="page flex-1 overflow-y-auto no-scrollbar px-4 pb-24 app-bg hidden">
+    <h2 class="text-lg font-bold text-center my-4 text-main" data-i18n="allCategories">All Categories</h2>
+    <div id="exploreCats" class="grid grid-cols-2 gap-3 mb-5"></div>
+    <h3 class="font-bold text-sm mb-3 text-main" data-i18n="allWallpapers">All Wallpapers</h3>
+    <div id="wallGrid" class="grid grid-cols-2 gap-3"></div>
+  </main>
+
+  <main id="favorites-page" class="page flex-1 overflow-y-auto no-scrollbar px-4 pb-24 app-bg hidden"><h2 class="text-lg font-bold text-center my-4 text-main" data-i18n="favorites">Favorites</h2><div id="favGrid" class="grid grid-cols-2 gap-3"></div></main>
+  <main id="downloads-page" class="page flex-1 overflow-y-auto no-scrollbar px-4 pb-24 app-bg hidden"><h2 class="text-lg font-bold text-center my-4 text-main" data-i18n="downloads">Downloads</h2><div id="downGrid" class="grid grid-cols-2 gap-3"></div></main>
+  <main id="profile-page" class="page flex-1 overflow-y-auto no-scrollbar px-4 pb-24 app-bg hidden"><h2 class="text-lg font-bold text-center my-4 text-main" data-i18n="profile">Profile</h2><div class="card-bg rounded-3xl p-5 border border-main text-center"><div class="w-20 h-20 bg-purple-neon rounded-full mx-auto flex items-center justify-center text-4xl font-bold overflow-hidden"><img id="profileAvatarImg" class="hidden w-full h-full object-cover" alt="Avatar"><span id="profileAvatarLetter">W</span></div><label for="profileAvatarInput" class="avatar-action"><i class="fas fa-camera"></i> Change Avatar</label><input id="profileAvatarInput" type="file" accept="image/*" class="hidden" onchange="updateProfileAvatar(event)"><h3 id="profileName" class="font-bold mt-3 text-main flex items-center justify-center gap-1">
+  WallFlix
+  <i class="fas fa-check-circle text-purple-500 text-[10px]"></i>
+</h3><p id="userEmail" class="text-xs text-muted mt-1">Guest user</p><p class="text-sm text-amber-400"><i class="fas fa-star"></i> Premium Member <span id="profileAdminBadge" class="admin-badge hidden"><i class="fas fa-crown"></i>ADMIN</span></p><div class="grid grid-cols-3 gap-2 mt-5"><div class="card2-bg p-3 rounded-xl"><b id="pFav">0</b><p class="text-[10px] text-muted" data-i18n="favorites">Favorites</p></div><div class="card2-bg p-3 rounded-xl"><b id="pDown">0</b><p class="text-[10px] text-muted" data-i18n="downloads">Downloads</p></div><div class="card2-bg p-3 rounded-xl"><b id="pViews">0</b><p class="text-[10px] text-muted">Views</p></div></div><div class="mt-4 text-left"><div class="profile-row"><span class="text-muted text-xs">Email</span><b id="profileEmail2" class="text-xs text-main">Guest</b></div><div class="profile-row"><span class="text-muted text-xs">Likes</span><b id="profileTotalLikes" class="text-xs text-main">0</b></div><div class="profile-row"><span class="text-muted text-xs">Firebase</span><b id="profileFirebaseStatus" class="text-xs text-green-400">Ready</b></div><div class="profile-row"><span class="text-muted text-xs">Join Date</span><b id="profileJoinDate" class="text-xs text-main">Today</b></div><div class="profile-row"><span class="text-muted text-xs">Uploads</span><b id="profileUploadsCount" class="text-xs text-main">0</b></div></div></div></main>
+
+  <main id="admin-page" class="page flex-1 overflow-y-auto no-scrollbar px-4 pb-24 app-bg hidden">
+    <div class="flex items-center justify-between my-4">
+      <h2 class="text-lg font-bold text-main">Admin Dashboard</h2>
+      <span class="admin-badge"><i class="fas fa-crown"></i> ADMIN</span>
+    </div>
+
+    <div class="grid grid-cols-2 gap-3 mb-4">
+      <div class="admin-card rounded-2xl p-4">
+        <i class="fas fa-images text-purple-400"></i>
+        <p class="text-[10px] text-muted mt-2">Wallpapers</p>
+        <b id="adminWallCount" class="text-xl text-main">0</b>
+      </div>
+      <div class="admin-card rounded-2xl p-4">
+        <i class="fas fa-eye text-cyan-400"></i>
+        <p class="text-[10px] text-muted mt-2">Total Views</p>
+        <b id="adminViewsCount" class="text-xl text-main">0</b>
+      </div>
+      <div class="admin-card rounded-2xl p-4">
+        <i class="fas fa-heart text-pink-400"></i>
+        <p class="text-[10px] text-muted mt-2">Total Likes</p>
+        <b id="adminLikesCount" class="text-xl text-main">0</b>
+      </div>
+      <div class="admin-card rounded-2xl p-4">
+        <i class="fas fa-download text-purple-300"></i>
+        <p class="text-[10px] text-muted mt-2">Downloads</p>
+        <b id="adminDownCount" class="text-xl text-main">0</b>
+      </div>
+    </div>
+    <div class="admin-card rounded-3xl p-4 mb-4">
+      <h3 class="font-bold text-sm mb-3 text-main"><i class="fas fa-chart-pie text-purple-400 mr-1"></i> Analytics Pro</h3>
+      <div class="grid grid-cols-2 gap-2">
+        <div class="card2-bg rounded-2xl p-3"><p class="text-[10px] text-muted">Top Wallpaper</p><b id="adminTopWallpaperV28" class="text-xs text-main">-</b></div>
+        <div class="card2-bg rounded-2xl p-3"><p class="text-[10px] text-muted">Top Category</p><b id="adminTopCategoryV28" class="text-xs text-main">-</b></div>
+        <div class="card2-bg rounded-2xl p-3"><p class="text-[10px] text-muted">Avg Rating</p><b id="adminAvgRatingV28" class="text-xs text-main">0.0</b></div>
+        <div class="card2-bg rounded-2xl p-3"><p class="text-[10px] text-muted">Downloads Today</p><b id="adminTodayDownV28" class="text-xs text-main">0</b></div>
+      </div>
+    </div>
+
+    <div class="admin-card rounded-3xl p-4 mb-4">
+      <h3 class="font-bold text-sm mb-3 text-main"><i class="fas fa-bell text-purple-400 mr-1"></i> Send Notification</h3>
+      <input id="adminNotifTitle" class="admin-input mb-2" placeholder="Notification title">
+      <textarea id="adminNotifDesc" class="admin-input mb-3" rows="3" placeholder="Notification message"></textarea>
+      <button onclick="adminSendNotification()" class="w-full bg-purple-neon text-white pill-btn"><i class="fas fa-paper-plane"></i> Send Notification</button>
+    </div>
+
+    <div class="admin-card rounded-3xl p-4 mb-4">
+      <h3 class="font-bold text-sm mb-3 text-main"><i class="fas fa-pen-to-square text-amber-400 mr-1"></i> Edit Selected Wallpaper</h3>
+      <input id="adminEditId" class="admin-input mb-2" placeholder="Wallpaper ID" readonly>
+      <input id="adminEditTitle" class="admin-input mb-2" placeholder="Wallpaper title">
+      <select id="adminEditCat" class="select-premium admin-input mb-3">
+        <option value="anime">Anime</option><option value="cars">Cars</option><option value="nature">Nature</option><option value="gaming">Gaming</option>
+        <option value="amoled">AMOLED</option><option value="space">Space</option><option value="sports">Sports</option><option value="abstract">Abstract</option>
+        <option value="minimal">Minimal</option><option value="morocco">Morocco</option><option value="cities">Cities</option><option value="animals">Animals</option>
+        <option value="technology">Technology</option><option value="luxury">Luxury</option><option value="music">Music</option><option value="neon">Neon</option>
+      </select>
+      <div class="grid grid-cols-1 gap-2">
+        <button onclick="adminSaveEdit()" class="bg-purple-neon text-white pill-btn"><i class="fas fa-save"></i> Save</button>
+        <button onclick="adminToggleFeatured()" class="bg-amber-500/15 text-amber-400 border border-amber-500/30 pill-btn"><i class="fas fa-star"></i> Featured</button>
+        <button onclick="adminDeleteSelected()" class="bg-red-500/15 text-red-400 border border-red-500/30 pill-btn"><i class="fas fa-trash"></i> Delete</button>
+      </div>
+    </div>
+
+    <h3 class="font-bold text-sm mb-3 text-main">Manage Wallpapers</h3>
+    <div id="adminWallList" class="flex flex-col gap-2 pb-8"></div>
+  </main>
+
+
+  <main id="privacy-page" class="page flex-1 overflow-y-auto no-scrollbar px-4 pb-24 app-bg hidden">
+    <h2 class="text-lg font-bold text-center my-4 text-main">Privacy Policy</h2>
+    <div class="page-card text-sm text-muted leading-7">
+      WallFlix uses Firebase Authentication, Firestore and Firebase Cloud Messaging. Favorites, likes, downloads, comments, ratings and notification tokens may be stored to make the app work across devices.
+    </div>
+  </main>
+  <main id="terms-page" class="page flex-1 overflow-y-auto no-scrollbar px-4 pb-24 app-bg hidden">
+    <h2 class="text-lg font-bold text-center my-4 text-main">Terms</h2>
+    <div class="page-card text-sm text-muted leading-7">Only upload wallpapers you own or have permission to use. Admin tools are restricted.</div>
+  </main>
+  <main id="contact-page" class="page flex-1 overflow-y-auto no-scrollbar px-4 pb-24 app-bg hidden">
+    <h2 class="text-lg font-bold text-center my-4 text-main">Contact</h2>
+    <div class="page-card text-sm text-muted leading-7">Contact: <b class="text-main">wallflix2@gmail.com</b></div>
+  </main>
+  <main id="about-page" class="page flex-1 overflow-y-auto no-scrollbar px-4 pb-24 app-bg hidden">
+    <h2 class="text-lg font-bold text-center my-4 text-main">About WallFlix</h2>
+    <div class="page-card text-sm text-muted leading-7">WallFlix Premium is a mobile-first wallpaper platform powered by Firebase.</div>
+  </main>
+
+<main id="videos-page" class="page flex-1 overflow-y-auto no-scrollbar px-4 pb-24 app-bg hidden">
+  <div class="v51-video-bar">
+    <button onclick="v51RenderVideos('all')" id="v51chip-all" class="v51-chip active"><i class="fas fa-layer-group"></i>All</button>
+    <button onclick="switchTab('explore')" class="v51-chip"><i class="fas fa-image"></i>Images</button>
+    <button onclick="v51RenderVideos('all')" id="v51chip-videos" class="v51-chip active"><i class="fas fa-video"></i>Videos</button>
+    <button onclick="v51RenderVideos('anime')" id="v51chip-anime" class="v51-chip"><i class="fas fa-dragon"></i>Anime</button>
+    <button onclick="v51RenderVideos('cars')" id="v51chip-cars" class="v51-chip"><i class="fas fa-car"></i>Cars</button>
+    <button onclick="v51RenderVideos('nature')" id="v51chip-nature" class="v51-chip"><i class="fas fa-mountain"></i>Nature</button>
+  </div>
+  <section><div class="v51-title"><h3>Video Categories</h3><button onclick="v51OpenAll('all')">View all</button></div><div id="v51VideoCategories" class="v51-cat-grid"></div></section>
+  <section><div class="v51-title"><h3>New Videos</h3><button onclick="v51OpenAll('all')">View all</button></div><div id="v51NewVideos" class="v51-video-row"></div></section>
+  <section><div class="v51-title"><h3>Trending Videos</h3><button onclick="v51OpenAll('all')">View all</button></div><div id="v51TrendingVideos" class="v51-video-row"></div></section>
+</main>
+
+<main id="all-videos-page" class="page flex-1 overflow-y-auto no-scrollbar px-4 pb-24 app-bg hidden">
+  <div class="flex items-center justify-between my-4">
+    <button onclick="switchTab('videos')" class="w-10 h-10 rounded-full card-bg border border-main text-main"><i class="fas fa-chevron-left"></i></button>
+    <h2 class="font-bold text-main">All Videos</h2>
+    <button class="w-10 h-10 rounded-full card-bg border border-main text-main"><i class="fas fa-search"></i></button>
+  </div>
+  <div class="v51-video-bar mb-2">
+    <button onclick="v51RenderAll('all')" id="v51all-all" class="v51-chip active">All</button>
+    <button onclick="v51RenderAll('cars')" id="v51all-cars" class="v51-chip">Cars</button>
+    <button onclick="v51RenderAll('nature')" id="v51all-nature" class="v51-chip">Nature</button>
+    <button onclick="v51RenderAll('cities')" id="v51all-cities" class="v51-chip">City</button>
+    <button onclick="v51RenderAll('anime')" id="v51all-anime" class="v51-chip">Anime</button>
+  </div>
+  <div id="v51AllVideosList"></div>
+</main>
+
+<main id="video-detail-page" class="page flex-1 overflow-y-auto no-scrollbar px-4 pb-24 app-bg hidden">
+  <div class="flex items-center justify-between my-4">
+    <button onclick="switchTab(v51LastPage||'videos')" class="w-10 h-10 rounded-full card-bg border border-main text-main"><i class="fas fa-chevron-left"></i></button>
+    <h2 class="font-bold text-main">Video Detail</h2>
+    <button onclick="v51LikeCurrent()" class="w-10 h-10 rounded-full card-bg border border-main text-red-400"><i class="far fa-heart"></i></button>
+  </div>
+  <div class="v51-detail"><video id="v51DetailVideo" controls playsinline></video></div>
+  <div class="mt-4">
+    <h2 id="v51DetailTitle" class="text-xl font-black text-main">Video</h2>
+    <p class="text-xs text-muted mt-1">By <span class="purple-neon font-bold">WallFlix Team</span> <i class="fas fa-check-circle text-purple-500 text-[9px]"></i></p>
+    <div class="flex gap-4 text-xs text-muted mt-3">
+      <span><i class="fas fa-eye"></i> <b id="v51DetailViews">0</b> Views</span>
+      <span><i class="far fa-heart"></i> <b id="v51DetailLikes">0</b> Likes</span>
+      <span><i class="fas fa-tag"></i> <b id="v51DetailCat">Cars</b></span>
+    </div>
+    <button onclick="v51DownloadCurrent()" class="w-full bg-purple-neon text-white rounded-xl py-4 mt-4 text-sm font-bold"><i class="fas fa-download mr-2"></i>Download</button>
+    <div class="v51-quality"><button>HD<br><small>720p</small></button><button class="active">FHD<br><small>1080p</small></button><button>4K<br><small>2160p</small></button></div>
+  </div>
+</main>
+
+<nav class="absolute bottom-0 inset-x-0 glass border-t border-main py-2 px-4 flex justify-between items-center z-30">
+    <button onclick="switchTab('home')" id="tab-home" class="tab flex flex-col items-center gap-1 active-tab w-12"><i class="fas fa-home text-lg"></i><span class="text-[9px] font-medium" data-i18n="home">Home</span></button>
+    <button onclick="switchTab('videos')" id="tab-videos" class="tab flex flex-col items-center gap-1 inactive-tab w-12"><i class="fas fa-video text-lg"></i><span class="text-[9px] font-medium">Videos</span></button>
+    <button onclick="switchTab('favorites')" id="tab-favorites" class="tab flex flex-col items-center gap-1 inactive-tab w-12"><i class="far fa-heart text-lg"></i><span class="text-[9px] font-medium" data-i18n="favorites">Favorites</span></button>
+    <button onclick="openUpload()" class="flex flex-col items-center gap-1 inactive-tab w-12"><i class="fas fa-cloud-upload-alt text-lg"></i><span class="text-[9px] font-medium" data-i18n="upload">Upload</span></button>
+    <button onclick="openMenu()" class="flex flex-col items-center gap-1 inactive-tab w-12"><i class="fas fa-bars text-lg"></i><span class="text-[9px] font-medium" data-i18n="menu">Menu</span></button>
+  </nav>
+
+  <div id="side-menu" class="fixed inset-0 bg-black/60 z-50 transition-all duration-300 menu-closed" onclick="closeMenu()">
+    <div id="menu-content" class="absolute right-0 top-0 bottom-0 w-[80%] max-w-[340px] app-bg p-5 flex flex-col translate-x-full transition-transform duration-300 overflow-y-auto no-scrollbar" onclick="event.stopPropagation()">
+      <button onclick="closeMenu()" class="text-muted p-2 mb-4 self-start"><i class="fas fa-arrow-left rtl-icon text-lg"></i></button>
+      <div class="bg-gradient-to-r from-purple-900/40 to-indigo-900/30 border border-purple-500/30 rounded-2xl p-4 flex items-center gap-3 mb-4"><div class="w-14 h-14 rounded-full bg-purple-neon flex items-center justify-center font-bold text-white text-2xl">W</div><div><h4 class="font-bold text-base text-main">WallFlix <span class="text-[10px] bg-amber-500 text-black px-2 py-0.5 rounded font-black">PREMIUM</span></h4><p class="text-xs text-amber-400"><i class="fas fa-star mr-1"></i>Premium Member</p></div></div>
+      <div class="flex flex-col gap-1 text-sm text-main flex-1">
+        <button onclick="switchTab('profile');closeMenu()" class="flex items-center gap-4 px-3 py-3 rounded-xl hover:card2-bg text-left"><i class="far fa-user text-muted w-5"></i><span data-i18n="profile">Profile</span></button>
+        <button onclick="openModal('auth-modal')" class="flex items-center gap-4 px-3 py-3 rounded-xl text-left"><i class="fas fa-right-to-bracket text-muted w-5"></i><span id="authMenuText">Login / Register</span></button>
+        <button onclick="switchTab('favorites');closeMenu()" class="flex justify-between items-center px-3 py-3 rounded-xl hover:card2-bg"><span class="flex items-center gap-4"><i class="far fa-heart text-muted w-5"></i><span data-i18n="favorites">Favorites</span></span><span id="favCountMenu" class="bg-purple-500/20 text-purple-400 text-xs px-2 py-0.5 rounded-full font-bold">0</span></button>
+        <button onclick="switchTab('downloads');closeMenu()" class="flex items-center gap-4 px-3 py-3 rounded-xl text-left"><i class="fas fa-download text-muted w-5"></i><span data-i18n="downloads">Downloads</span></button>
+        <button onclick="openAdminDashboard()" class="flex items-center gap-4 px-3 py-3 rounded-xl text-left"><i class="fas fa-crown text-amber-400 w-5"></i><span>Admin Dashboard</span><span class="admin-badge ml-auto"><i class="fas fa-shield"></i></span></button>
+
+        <button onclick="switchTab('about');closeMenu()" class="flex items-center gap-4 px-3 py-3 rounded-xl text-left"><i class="fas fa-circle-info text-muted w-5"></i><span>About WallFlix</span></button>
+        <button onclick="switchTab('privacy');closeMenu()" class="flex items-center gap-4 px-3 py-3 rounded-xl text-left"><i class="fas fa-shield-halved text-muted w-5"></i><span>Privacy Policy</span></button>
+        <button onclick="switchTab('terms');closeMenu()" class="flex items-center gap-4 px-3 py-3 rounded-xl text-left"><i class="fas fa-file-contract text-muted w-5"></i><span>Terms</span></button>
+        <button onclick="switchTab('contact');closeMenu()" class="flex items-center gap-4 px-3 py-3 rounded-xl text-left"><i class="fas fa-envelope text-muted w-5"></i><span>Contact</span></button>
+        <button onclick="enablePushNotifications()" class="flex items-center gap-4 px-3 py-3 rounded-xl text-left"><i class="fas fa-bell text-purple-400 w-5"></i><span>Enable Push</span></button>
+        <hr class="border-main my-2" />
+        <button onclick="openModal('language-modal')" class="w-full flex items-center gap-4 px-3 py-3 rounded-xl text-left"><i class="fas fa-globe text-muted w-5"></i><span data-i18n="changeLanguage">Change Language</span></button>
+        <button onclick="toggleTheme()" class="flex justify-between items-center px-3 py-3"><span class="flex items-center gap-4"><i id="menu-theme-icon" class="far fa-moon text-muted w-5"></i><span id="theme-label" data-i18n="darkTheme">Dark Theme</span></span><span class="w-11 h-6 bg-purple-neon rounded-full p-1 flex items-center transition"><span id="theme-knob" class="w-4 h-4 bg-white rounded-full transition ml-auto"></span></span></button>
+      </div>
+      <button onclick="logout()" class="w-full bg-purple-500/20 text-purple-400 font-semibold py-3 rounded-xl text-sm mt-4" data-i18n="logout">Logout</button>
+    </div>
+  </div>
+
+  <div id="language-modal" class="fixed inset-0 bg-black/60 z-50 items-end justify-center hidden opacity-0 transition-opacity duration-300" onclick="closeModal('language-modal')"><div class="modal-panel w-full app-bg rounded-t-[28px] p-5 max-h-[75%] flex flex-col transition-transform duration-300" onclick="event.stopPropagation()"><div class="flex items-center gap-3 mb-4"><button onclick="closeModal('language-modal')" class="text-muted p-2"><i class="fas fa-chevron-left rtl-icon"></i></button><h3 class="font-bold text-sm text-main" data-i18n="changeLanguage">Change Language</h3></div><div id="languageList" class="flex-1 overflow-y-auto no-scrollbar flex flex-col gap-2 pb-6"></div></div></div>
+  <div id="notifications-modal" class="fixed inset-0 bg-black/60 z-50 items-end justify-center hidden opacity-0 transition-opacity duration-300" onclick="closeModal('notifications-modal')"><div class="modal-panel w-full app-bg rounded-t-[28px] p-5 max-h-[80%] flex flex-col transition-transform duration-300" onclick="event.stopPropagation()"><div class="flex justify-between items-center mb-4"><div class="flex items-center gap-2"><button onclick="closeModal('notifications-modal')" class="text-muted p-2"><i class="fas fa-chevron-left rtl-icon"></i></button><h3 class="font-bold text-sm text-main" data-i18n="notifications">Notifications</h3></div><button onclick="window.markAllAsRead()" class="text-xs text-purple-400" data-i18n="markRead">Mark all as read</button></div><div id="notificationsList" class="flex-1 overflow-y-auto no-scrollbar flex flex-col gap-2 pb-6"></div></div></div>
+  <div id="upload-modal" class="fixed inset-0 bg-black/60 z-50 items-end justify-center hidden opacity-0 transition-opacity duration-300" onclick="closeModal('upload-modal')">
+    <div class="modal-panel w-full app-bg rounded-t-[28px] p-5 max-h-[88%] flex flex-col transition-transform duration-300 overflow-y-auto no-scrollbar pb-24" onclick="event.stopPropagation()">
+      <div class="flex items-center gap-3 mb-4">
+        <button onclick="closeModal('upload-modal')" class="text-muted p-2"><i class="fas fa-chevron-left rtl-icon"></i></button>
+        <h3 class="font-bold text-base text-main" data-i18n="upload">Upload</h3>
+      </div>
+
+      <div class="file-drop rounded-2xl p-4 mb-3 text-center">
+        <div class="w-14 h-14 mx-auto rounded-2xl bg-purple-500/20 flex items-center justify-center text-purple-400 mb-2">
+          <i class="fas fa-photo-film text-2xl"></i>
+        </div>
+        <p class="text-xs text-muted mb-3">Choose image or video from your phone</p>
+        <div class="v46-upload-choice">
+          <label for="uploadFile"><i class="fas fa-image"></i><span>Choose Image</span></label>
+          <label for="uploadVideoFile"><i class="fas fa-video"></i><span>Choose Video</span></label>
+        </div>
+        <input id="uploadFile" type="file" accept="image/*" class="hidden" onchange="previewUploadFile(event)">
+        <input id="uploadVideoFile" type="file" accept="video/*" class="hidden" onchange="previewVideoUploadV45(event)">
+        <img id="uploadPreview" class="hidden" />
+        <video id="uploadVideoPreview" muted loop playsinline controls></video>
+      </div>
+
+      <div id="adminUnlockedCard" class="admin-unlocked-card"><span class="text-xs text-main"><i class="fas fa-shield-halved text-amber-400 mr-1"></i> Admin unlocked</span><button onclick="adminLogout()" class="text-xs text-red-400 font-bold">Logout Admin</button></div>
+      <input id="adminSecret" type="password" placeholder="Admin secret" class="card-bg border border-main rounded-xl p-3 text-sm mb-2 outline-none text-main">
+      <input id="uploadName" placeholder="Wallpaper name" class="card-bg border border-main rounded-xl p-3 text-sm mb-2 outline-none text-main">
+      <input id="uploadUrl" placeholder="Admin Firestore Image URL (optional)" class="card-bg border border-main rounded-xl p-3 text-sm mb-2 outline-none text-main">
+
+      <label class="text-xs text-muted mb-1 mt-1">Choose category</label><select id="uploadCategory" class="select-premium card-bg border border-main rounded-xl p-3 text-sm mb-3 outline-none text-main">
+        <option value="anime">🐉 Anime</option>
+        <option value="cars">🚗 Cars</option>
+        <option value="nature">🌄 Nature</option>
+        <option value="gaming">🎮 Gaming</option>
+        <option value="amoled">🌙 AMOLED</option>
+        <option value="space">🚀 Space</option>
+        <option value="sports">🏆 Sports</option>
+        <option value="abstract">✨ Abstract</option>
+        <option value="minimal">💎 Minimal</option>
+        <option value="morocco">🇲🇦 Morocco</option>
+        <option value="cities">🏙️ Cities</option>
+        <option value="animals">🐾 Animals</option>
+        <option value="technology">🤖 Technology</option>
+        <option value="luxury">👑 Luxury</option>
+        <option value="music">🎧 Music</option>
+        <option value="neon">💡 Neon</option>
+      </select>
+<div class="v46-upload-actions">
+        <button onclick="fakeUpload()" type="button">
+          <i class="fas fa-cloud-arrow-up"></i><span>Upload Wallpaper</span>
+        </button>
+        <button onclick="fakeUploadVideoV45()" type="button">
+          <i class="fas fa-video"></i><span>Upload Video</span>
+        </button>
+      </div>
+
+      <p class="text-[10px] text-muted mt-3">Free mode: selected images are saved locally in this browser because Firebase Storage needs Blaze plan.</p>
+    </div>
+  </div>
+
+  <div id="admin-access-modal" class="fixed inset-0 bg-black/70 z-[80] items-end justify-center hidden opacity-0 transition-opacity duration-300" onclick="closeModal('admin-access-modal')">
+    <div class="modal-panel w-full app-bg rounded-t-[28px] p-5 max-h-[75%] flex flex-col transition-transform duration-300" onclick="event.stopPropagation()">
+      <div class="admin-card rounded-3xl p-5 text-center">
+        <div class="w-16 h-16 mx-auto rounded-3xl bg-amber-500/20 text-amber-400 flex items-center justify-center mb-3"><i class="fas fa-crown text-2xl"></i></div>
+        <h3 class="text-lg font-bold text-main">Admin Access</h3>
+        <p class="text-xs text-muted mt-1 mb-4">Unlock dashboard</p>
+        <input id="adminAccessSecret" type="password" class="admin-input text-center mb-3" placeholder="Admin secret">
+        <button onclick="unlockAdminAccess()" class="w-full bg-purple-neon text-white pill-btn py-4"><i class="fas fa-unlock"></i> Unlock Dashboard</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="auth-modal" class="fixed inset-0 bg-black/60 z-50 items-end justify-center hidden opacity-0 transition-opacity duration-300" onclick="closeModal('auth-modal')"><div class="modal-panel w-full app-bg rounded-t-[28px] p-5 max-h-[85%] flex flex-col transition-transform duration-300" onclick="event.stopPropagation()"><div class="flex items-center gap-3 mb-4"><button onclick="closeModal('auth-modal')" class="text-muted p-2"><i class="fas fa-chevron-left rtl-icon"></i></button><h3 class="font-bold text-sm text-main">Firebase Login</h3></div><div id="loginFormBox" class="card-bg border border-main rounded-2xl p-4 mb-3"><p class="text-xs text-muted mb-3">Sign in to save favorites, downloads and admin uploads in Firebase.</p><input id="authEmail" type="email" placeholder="Email" class="w-full card2-bg border border-main rounded-xl p-3 text-sm mb-2 outline-none text-main"><input id="authPass" type="password" placeholder="Password" class="w-full card2-bg border border-main rounded-xl p-3 text-sm mb-3 outline-none text-main"><div class="grid grid-cols-2 gap-2"><button onclick="loginUser()" class="bg-purple-neon text-white rounded-xl py-3 text-sm font-semibold">Login</button><button onclick="registerUser()" class="card2-bg text-main border border-main rounded-xl py-3 text-sm font-semibold">Register</button></div></div><button id="logoutBtnAuth" onclick="logout()" class="w-full bg-red-500/15 text-red-400 rounded-xl py-3 text-sm font-semibold hidden">Logout</button></div></div>
+
+
+  <div id="detail-modal" class="fixed inset-0 app-bg z-50 flex flex-col hidden opacity-0 transition-opacity duration-300">
+    <div class="relative detail-image-wrap">
+      <img id="detail-img-view" src="" class="w-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/35"></div>
+      <div class="absolute top-6 inset-x-4 flex justify-between items-center z-20">
+        <button onclick="closeDetailModal()" class="w-10 h-10 bg-black/45 backdrop-blur-md rounded-full flex items-center justify-center text-white">
+          <i class="fas fa-chevron-left rtl-icon"></i>
+        </button>
+        <button onclick="toggleFavorite(currentDetailId)" class="w-10 h-10 bg-black/45 backdrop-blur-md rounded-full flex items-center justify-center text-white">
+          <i id="detail-heart" class="far fa-heart"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="detail-content p-5 app-bg rounded-t-[28px] relative z-10">
+      <h3 id="detail-title" class="text-base font-bold text-main">Wallpaper View</h3>
+      <div id="detail-featured-badge" class="featured-badge hidden mb-2"><i class="fas fa-star"></i> Featured</div>
+      <p class="text-[11px] text-muted mb-2">By WallFlix Team <i class="fas fa-check-circle text-purple-500 text-[9px]"></i></p>
+      <div id="detail-rating-pill" class="detail-rating-pill"><i class="fas fa-star"></i><span id="detail-rating-text">0.0</span><span id="detail-rating-count">(0)</span></div>
+      <div class="flex flex-col gap-2 mb-4">
+        <button onclick="downloadWallpaper(currentDetailId)" class="w-full bg-purple-neon text-white font-semibold py-3 rounded-xl text-xs flex items-center justify-center gap-2">
+          <i class="fas fa-download"></i><span data-i18n="download">Download</span>
+        </button>
+        <div class="grid grid-cols-3 gap-2 mb-2"><button onclick="downloadQuality('HD')" class="quality-btn"><i class="fas fa-mobile-screen"></i>HD</button><button onclick="downloadQuality('FHD')" class="quality-btn"><i class="fas fa-display"></i>FHD</button><button onclick="downloadQuality('4K')" class="quality-btn"><i class="fas fa-gem"></i>4K</button></div>
+        <button onclick="shareWallpaper()" class="w-full card-bg text-main border border-main py-3 rounded-xl text-xs flex items-center justify-center gap-2">
+          <i class="fas fa-share-nodes text-purple-400"></i> Share Wallpaper
+        </button>
+        <button onclick="openCommentsModal()" class="w-full card-bg text-main border border-main py-3 rounded-xl text-xs flex items-center justify-center gap-2">
+          <i class="fas fa-comments text-amber-400"></i> Comments & Ratings
+        </button>
+        <button onclick="closeDetailModal()" class="w-full card-bg text-muted py-3 rounded-xl text-xs" data-i18n="backHome">Back to Home</button>
+      </div>
+      <div class="mt-3"><div class="top-section-title"><h3 class="font-bold text-sm text-main"><i class="fas fa-wand-magic-sparkles text-purple-400 mr-1"></i> More Like This</h3></div><div id="relatedWallpapersList" class="flex gap-3 overflow-x-auto no-scrollbar"></div></div>
+    </div>
+  </div>
+
+  <div id="comments-modal" class="fixed inset-0 bg-black/60 z-[75] items-end justify-center hidden opacity-0 transition-opacity duration-300" onclick="closeModal('comments-modal')">
+    <div class="modal-panel w-full app-bg rounded-t-[28px] p-5 max-h-[82%] flex flex-col transition-transform duration-300" onclick="event.stopPropagation()">
+      <div class="flex items-center gap-3 mb-3">
+        <button onclick="closeModal('comments-modal')" class="text-muted p-2"><i class="fas fa-chevron-left rtl-icon"></i></button>
+        <h3 class="font-bold text-sm text-main">Comments & Ratings</h3>
+      </div>
+      <div id="ratingAverageBox" class="rating-summary-premium"><i class="fas fa-star"></i><span id="ratingAverageText">0.0</span><small id="ratingCountText">(0 ratings)</small></div>
+      <div id="ratingStars" class="flex gap-2 justify-center text-2xl mb-3">
+        <button onclick="setRating(1)" class="rating-star"><i class="far fa-star"></i></button>
+        <button onclick="setRating(2)" class="rating-star"><i class="far fa-star"></i></button>
+        <button onclick="setRating(3)" class="rating-star"><i class="far fa-star"></i></button>
+        <button onclick="setRating(4)" class="rating-star"><i class="far fa-star"></i></button>
+        <button onclick="setRating(5)" class="rating-star"><i class="far fa-star"></i></button>
+      </div>
+      <textarea id="commentText" class="admin-input mb-3" rows="3" placeholder="Write your comment..."></textarea>
+      <button onclick="submitComment()" class="bg-purple-neon text-white pill-btn w-full mb-3"><i class="fas fa-paper-plane"></i> Send Comment</button>
+      <div id="commentsList" class="comment-box pb-4"></div>
+    </div>
+  </div>
+
+
+  <div id="install-banner" class="install-banner">
+    <div class="w-11 h-11 bg-purple-neon rounded-2xl flex items-center justify-center text-white font-bold">W</div>
+    <div class="flex-1"><h4 class="text-sm font-bold text-main">Install WallFlix</h4><p class="text-[10px] text-muted">Use it like an app</p></div>
+    <button onclick="installApp()" class="bg-purple-neon text-white rounded-xl px-3 py-2 text-xs font-bold">Install</button>
+    <button onclick="dismissInstall()" class="text-muted p-2"><i class="fas fa-times"></i></button>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+<script>
+const LS={lang:'wallflix_lang',theme:'wallflix_theme',fav:'wallflix_favs',down:'wallflix_downloads',like:'wallflix_likes',admin:'wallflix_admin_unlocked'};
+const firebaseConfig={apiKey:'AIzaSyC32tudAZPgEomIygQHoy2RZCGLfSZ9FCk',authDomain:'wallflix-c0d47.firebaseapp.com',projectId:'wallflix-c0d47',storageBucket:'wallflix-c0d47.firebasestorage.app',messagingSenderId:'1035897594805',appId:'1:1035897594805:web:950e9abdd1b056ac8c6ffc',measurementId:'G-3MMQF7CVSM'};
+let fbReady=false,auth=null,db=null,storage=null,messaging=null,currentUser=null;
+try{firebase.initializeApp(firebaseConfig);auth=firebase.auth();db=firebase.firestore();storage=null;messaging=firebase.messaging&&firebase.messaging.isSupported?null:null;fbReady=true;}catch(e){console.warn('Firebase not ready:',e);}
+
+const languages=[['en','🇺🇸','English','ltr'],['ar','🇲🇦','العربية','rtl'],['fr','🇫🇷','Français','ltr'],['de','🇩🇪','Deutsch','ltr'],['es','🇪🇸','Español','ltr'],['it','🇮🇹','Italiano','ltr'],['pt','🇵🇹','Português','ltr'],['nl','🇳🇱','Nederlands','ltr']];
+const I18N={
+en:{search:'Search wallpapers...',editors:"Editor's Choice",viewWallpaper:'View Wallpaper',trending:'Trending Now',viewAll:'View all',categories:'Categories',daily:'Daily Wallpaper',viewToday:"View Today's Wallpaper",allCategories:'All Categories',allWallpapers:'All Wallpapers',favorites:'Favorites',downloads:'Downloads',profile:'Profile',languages:'Languages',home:'Home',explore:'Explore',upload:'Upload',menu:'Menu',changeLanguage:'Change Language',darkTheme:'Dark Theme',lightTheme:'Light Theme',logout:'Logout',notifications:'Notifications',markRead:'Mark all as read',notifTitle:'New Gaming Wallpapers',notifDesc:'10 new wallpapers added',download:'Download',backHome:'Back to Home',empty:'No items yet',addedFav:'Added to favorites',removedFav:'Removed from favorites',downloaded:'Download started',filtersReady:'Filters ready',loggedOut:'Logged out',uploadWallpaper:'Upload Wallpaper',wrongSecret:'Wrong admin secret',uploaded:'Wallpaper added'},
+ar:{search:'بحث عن الخلفيات...',editors:'اختيار المحرر',viewWallpaper:'مشاهدة الخلفية',trending:'الأكثر رواجا',viewAll:'عرض الكل',categories:'الأقسام',daily:'خلفية اليوم',viewToday:'مشاهدة خلفية اليوم',allCategories:'كل الأقسام',allWallpapers:'كل الخلفيات',favorites:'المفضلة',downloads:'التحميلات',profile:'الملف الشخصي',languages:'اللغات',home:'الرئيسية',explore:'استكشاف',upload:'رفع',menu:'القائمة',changeLanguage:'تغيير اللغة',darkTheme:'الوضع الداكن',lightTheme:'الوضع الفاتح',logout:'تسجيل الخروج',notifications:'الإشعارات',markRead:'تعليم الكل كمقروء',notifTitle:'خلفيات ألعاب جديدة',notifDesc:'تمت إضافة 10 خلفيات جديدة',download:'تحميل',backHome:'الرجوع للرئيسية',empty:'لا توجد عناصر بعد',addedFav:'تمت الإضافة للمفضلة',removedFav:'تم الحذف من المفضلة',downloaded:'بدأ التحميل',filtersReady:'الفلاتر جاهزة',loggedOut:'تم تسجيل الخروج',uploadWallpaper:'رفع الخلفية',wrongSecret:'كود الأدمن غير صحيح',uploaded:'تمت إضافة الخلفية'},
+fr:{search:'Rechercher des fonds...',editors:"Choix de l’éditeur",viewWallpaper:'Voir le fond',trending:'Tendance',viewAll:'Voir tout',categories:'Catégories',daily:'Fond du jour',viewToday:'Voir le fond du jour',allCategories:'Toutes les catégories',allWallpapers:'Tous les fonds',favorites:'Favoris',downloads:'Téléchargements',profile:'Profil',languages:'Langues',home:'Accueil',explore:'Explorer',upload:'Ajouter',menu:'Menu',changeLanguage:'Changer la langue',darkTheme:'Mode sombre',lightTheme:'Mode clair',logout:'Déconnexion',notifications:'Notifications',markRead:'Tout marquer lu',notifTitle:'Nouveaux fonds Gaming',notifDesc:'10 nouveaux fonds ajoutés',download:'Télécharger',backHome:'Retour accueil',empty:'Aucun élément',addedFav:'Ajouté aux favoris',removedFav:'Retiré des favoris',downloaded:'Téléchargement lancé',filtersReady:'Filtres prêts',loggedOut:'Déconnecté',uploadWallpaper:'Ajouter le fond',wrongSecret:'Code admin incorrect',uploaded:'Fond ajouté'},
+de:{search:'Wallpaper suchen...',editors:'Auswahl der Redaktion',viewWallpaper:'Wallpaper ansehen',trending:'Aktuell beliebt',viewAll:'Alle anzeigen',categories:'Kategorien',daily:'Wallpaper des Tages',viewToday:'Heutiges Wallpaper ansehen',allCategories:'Alle Kategorien',allWallpapers:'Alle Wallpaper',favorites:'Favoriten',downloads:'Downloads',profile:'Profil',languages:'Sprachen',home:'Home',explore:'Entdecken',upload:'Upload',menu:'Menü',changeLanguage:'Sprache ändern',darkTheme:'Dunkles Design',lightTheme:'Helles Design',logout:'Abmelden',notifications:'Benachrichtigungen',markRead:'Alle gelesen',notifTitle:'Neue Gaming-Wallpaper',notifDesc:'10 neue Wallpaper hinzugefügt',download:'Download',backHome:'Zurück',empty:'Noch nichts da',addedFav:'Zu Favoriten hinzugefügt',removedFav:'Aus Favoriten entfernt',downloaded:'Download gestartet',filtersReady:'Filter bereit',loggedOut:'Abgemeldet',uploadWallpaper:'Wallpaper hochladen',wrongSecret:'Falsches Admin-Passwort',uploaded:'Wallpaper hinzugefügt'},
+es:{search:'Buscar fondos...',editors:'Selección del editor',viewWallpaper:'Ver fondo',trending:'Tendencias',viewAll:'Ver todo',categories:'Categorías',daily:'Fondo del día',viewToday:'Ver fondo de hoy',allCategories:'Todas las categorías',allWallpapers:'Todos los fondos',favorites:'Favoritos',downloads:'Descargas',profile:'Perfil',languages:'Idiomas',home:'Inicio',explore:'Explorar',upload:'Subir',menu:'Menú',changeLanguage:'Cambiar idioma',darkTheme:'Tema oscuro',lightTheme:'Tema claro',logout:'Cerrar sesión',notifications:'Notificaciones',markRead:'Marcar todo leído',notifTitle:'Nuevos fondos gaming',notifDesc:'10 nuevos fondos añadidos',download:'Descargar',backHome:'Volver',empty:'Sin elementos',addedFav:'Añadido a favoritos',removedFav:'Quitado de favoritos',downloaded:'Descarga iniciada',filtersReady:'Filtros listos',loggedOut:'Sesión cerrada',uploadWallpaper:'Subir fondo',wrongSecret:'Clave admin incorrecta',uploaded:'Fondo añadido'},
+it:{search:'Cerca sfondi...',editors:'Scelto dalla redazione',viewWallpaper:'Vedi sfondo',trending:'Di tendenza',viewAll:'Vedi tutto',categories:'Categorie',daily:'Sfondo del giorno',viewToday:'Vedi sfondo di oggi',allCategories:'Tutte le categorie',allWallpapers:'Tutti gli sfondi',favorites:'Preferiti',downloads:'Download',profile:'Profilo',languages:'Lingue',home:'Home',explore:'Esplora',upload:'Carica',menu:'Menu',changeLanguage:'Cambia lingua',darkTheme:'Tema scuro',lightTheme:'Tema chiaro',logout:'Logout',notifications:'Notifiche',markRead:'Segna tutto letto',notifTitle:'Nuovi sfondi gaming',notifDesc:'10 nuovi sfondi aggiunti',download:'Scarica',backHome:'Torna home',empty:'Nessun elemento',addedFav:'Aggiunto ai preferiti',removedFav:'Rimosso dai preferiti',downloaded:'Download avviato',filtersReady:'Filtri pronti',loggedOut:'Disconnesso',uploadWallpaper:'Carica sfondo',wrongSecret:'Codice admin errato',uploaded:'Sfondo aggiunto'},
+pt:{search:'Pesquisar wallpapers...',editors:'Escolha do editor',viewWallpaper:'Ver wallpaper',trending:'Em alta',viewAll:'Ver tudo',categories:'Categorias',daily:'Wallpaper do dia',viewToday:'Ver wallpaper de hoje',allCategories:'Todas as categorias',allWallpapers:'Todos os wallpapers',favorites:'Favoritos',downloads:'Downloads',profile:'Perfil',languages:'Idiomas',home:'Início',explore:'Explorar',upload:'Enviar',menu:'Menu',changeLanguage:'Alterar idioma',darkTheme:'Tema escuro',lightTheme:'Tema claro',logout:'Sair',notifications:'Notificações',markRead:'Marcar tudo lido',notifTitle:'Novos wallpapers gaming',notifDesc:'10 novos wallpapers adicionados',download:'Download',backHome:'Voltar',empty:'Sem itens',addedFav:'Adicionado aos favoritos',removedFav:'Removido dos favoritos',downloaded:'Download iniciado',filtersReady:'Filtros prontos',loggedOut:'Saiu',uploadWallpaper:'Enviar wallpaper',wrongSecret:'Senha admin errada',uploaded:'Wallpaper adicionado'},
+nl:{search:'Wallpapers zoeken...',editors:'Keuze van de redactie',viewWallpaper:'Bekijk wallpaper',trending:'Trending',viewAll:'Alles bekijken',categories:'Categorieën',daily:'Wallpaper van de dag',viewToday:'Bekijk vandaag',allCategories:'Alle categorieën',allWallpapers:'Alle wallpapers',favorites:'Favorieten',downloads:'Downloads',profile:'Profiel',languages:'Talen',home:'Home',explore:'Ontdek',upload:'Upload',menu:'Menu',changeLanguage:'Taal wijzigen',darkTheme:'Donker thema',lightTheme:'Licht thema',logout:'Uitloggen',notifications:'Meldingen',markRead:'Alles gelezen',notifTitle:'Nieuwe gaming wallpapers',notifDesc:'10 nieuwe wallpapers toegevoegd',download:'Download',backHome:'Terug naar home',empty:'Nog geen items',addedFav:'Toegevoegd aan favorieten',removedFav:'Verwijderd uit favorieten',downloaded:'Download gestart',filtersReady:'Filters klaar',loggedOut:'Uitgelogd',uploadWallpaper:'Wallpaper uploaden',wrongSecret:'Verkeerde admincode',uploaded:'Wallpaper toegevoegd'}};
+const cats=[
+['anime','fa-dragon','text-pink-500','Anime'],
+['cars','fa-car-side','text-orange-500','Cars'],
+['nature','fa-mountain-sun','text-green-500','Nature'],
+['gaming','fa-gamepad','text-blue-500','Gaming'],
+['amoled','fa-moon','text-purple-500','AMOLED'],
+['space','fa-rocket','text-indigo-500','Space'],
+['sports','fa-trophy','text-yellow-500','Sports'],
+['abstract','fa-wand-magic-sparkles','text-fuchsia-500','Abstract'],
+['minimal','fa-gem','text-zinc-400','Minimal'],
+['morocco','fa-flag','text-red-500','Morocco'],
+['cities','fa-city','text-cyan-500','Cities'],
+['animals','fa-paw','text-emerald-500','Animals'],
+['technology','fa-microchip','text-sky-500','Technology'],
+['luxury','fa-crown','text-amber-500','Luxury'],
+['music','fa-headphones','text-violet-500','Music'],
+['neon','fa-lightbulb','text-pink-400','Neon']
+];
+let wallpapers=[
+{id:'img1',title:'Trending Anime Core',cat:'anime',img:'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=900',views:1420,likes:326,downloads:188},
+{id:'img2',title:'Hyper Supercar Neon',cat:'cars',img:'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=900',views:2190,likes:481,downloads:344},
+{id:'img3',title:'Nature Landscape',cat:'nature',img:'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=900',views:980,likes:204,downloads:129},
+{id:'img4',title:'Gaming Purple Setup',cat:'gaming',img:'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=900',views:1770,likes:390,downloads:260},
+{id:'img5',title:'Amoled Waves',cat:'amoled',img:'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=900',views:2510,likes:612,downloads:488},
+{id:'img6',title:'Space Galaxy',cat:'space',img:'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=900',views:1860,likes:422,downloads:301},
+{id:'img7',title:'Morocco Desert Night',cat:'morocco',img:'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=900',views:1340,likes:355,downloads:221},
+{id:'img8',title:'Abstract Purple Flow',cat:'abstract',img:'https://images.unsplash.com/photo-1557683316-973673baf926?w=900',views:1620,likes:401,downloads:240},
+{id:'img9',title:'Minimal Dark Lines',cat:'minimal',img:'https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=900',views:1190,likes:275,downloads:192},
+{id:'img10',title:'Football Stadium Lights',cat:'sports',img:'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=900',views:980,likes:199,downloads:102},
+{id:'img11',title:'Cyber City Streets',cat:'cities',img:'https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=900',views:2100,likes:515,downloads:330},
+{id:'img12',title:'Wild Tiger Portrait',cat:'animals',img:'https://images.unsplash.com/photo-1561731216-c3a4d99437d5?w=900',views:870,likes:180,downloads:94},
+{id:'img13',title:'Future Technology Chip',cat:'technology',img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=900',views:1580,likes:360,downloads:207},
+{id:'img14',title:'Luxury Golden Watch',cat:'luxury',img:'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=900',views:1330,likes:290,downloads:175},
+{id:'img15',title:'Music Studio Vibes',cat:'music',img:'https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=900',views:920,likes:211,downloads:120},
+{id:'img16',title:'Pink Neon Lights',cat:'neon',img:'https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=900',views:1990,likes:450,downloads:299}
+];
+const sliderData=[{title:'Hyperdrive Supercar',desc:'Speed and neon lights',img:wallpapers[1].img,id:'img2'},{title:'Cyberpunk Night',desc:'Futuristic city vibes',img:'https://images.unsplash.com/photo-1545239351-ef35f43d514b?w=900',id:'slider2'},{title:'Neon Samurai',desc:'Tradition meets future',img:'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=900',id:'slider3'}];
+let currentSliderIndex=0,sliderInterval,currentDetailId='img1',selectedDailyImg=wallpapers[2].img,uploadImageData='',adminUnlocked=(localStorage.getItem(LS.admin)==='1'),notifications=[],selectedRating=0,currentComments=[],deferredPrompt=null;
+
+const ADMIN_SECRET='wallflix2026';
+function isAdminSaved(){return localStorage.getItem(LS.admin)==='1'}
+function refreshAdminSecretUI(){
+ const secret=document.getElementById('adminSecret');
+ const card=document.getElementById('adminUnlockedCard');
+ if(isAdminSaved()||adminUnlocked){
+  if(secret){secret.classList.add('admin-secret-hidden');secret.value=''}
+  if(card)card.classList.add('show');
+ }else{
+  if(secret)secret.classList.remove('admin-secret-hidden');
+  if(card)card.classList.remove('show');
+ }
+}
+function adminLogout(){
+ adminUnlocked=false;
+ localStorage.removeItem(LS.admin);
+ refreshAdminSecretUI();
+ showToast('Admin locked');
+}
+function wfAvgRating(w){
+ const c=Number((w&&w.ratingCount)||0), total=Number((w&&w.ratingTotal)||0);
+ return c?total/c:0;
+}
+function wfUpdateRatingAverage(){
+ const w=getWallpaper(currentDetailId)||{};
+ const avg=wfAvgRating(w);
+ const c=Number(w.ratingCount||0);
+ const avgEl=document.getElementById('ratingAverageText');
+ const countEl=document.getElementById('ratingCountText');
+ if(avgEl)avgEl.textContent=avg.toFixed(1);
+ if(countEl)countEl.textContent=`(${c} ratings)`;
+ const dt=document.getElementById('detail-rating-text');
+ const dc=document.getElementById('detail-rating-count');
+ if(dt)dt.textContent=avg.toFixed(1);
+ if(dc)dc.textContent=`(${c})`;
+}
+function wfTopRatedCard(w,i){
+ const avg=wfAvgRating(w);
+ return `<div class="top-rated-card" onclick="openDetailModal('${w.id}')">
+  <img src="${w.img}" alt="${w.title}">
+  <div class="shade"></div>
+  <div class="rank"><i class="fas fa-star"></i>${i+1}</div>
+  <div class="info"><h4>${w.title}</h4><p>${avg.toFixed(1)} ★ • ${w.cat}</p></div>
+ </div>`;
+}
+function wfRenderTopRated(){
+ const box=document.getElementById('topRatedList');
+ if(!box)return;
+ let rated=[...wallpapers].sort((a,b)=>{
+  const ra=wfAvgRating(a), rb=wfAvgRating(b);
+  if(rb!==ra)return rb-ra;
+  return score(b)-score(a);
+ }).slice(0,8);
+ box.innerHTML=rated.map(wfTopRatedCard).join('')||emptyBox();
+}
+function wfNormalizeRatings(){
+ wallpapers.forEach(w=>{
+  if(w.ratingTotal===undefined)w.ratingTotal=0;
+  if(w.ratingCount===undefined)w.ratingCount=0;
+ });
+}
+
+
+const RV_KEY='wallflix_recent_viewed';
+const AVATAR_KEY='wallflix_profile_avatar';
+
+function wfCard(w,extra=''){
+ return `<div class="vf-card" onclick="openDetailModal('${w.id}')">
+  <img src="${w.img}" alt="${w.title}">
+  <div class="shade"></div>
+  ${w.featured?'<div class="absolute top-2 left-2 featured-badge"><i class="fas fa-star"></i>Featured</div>':''}
+  <div class="info"><h4>${w.title}</h4><p>${extra||w.cat}</p></div>
+ </div>`;
+}
+function addRecentlyViewed(id){
+ if(!id||id==='slider'||id==='daily')return;
+ let arr=JSON.parse(localStorage.getItem(RV_KEY)||'[]').filter(x=>x!==id);
+ arr.unshift(id);
+ localStorage.setItem(RV_KEY,JSON.stringify(arr.slice(0,12)));
+ renderRecentlyViewed();
+}
+function clearRecentlyViewed(){
+ localStorage.removeItem(RV_KEY);
+ renderRecentlyViewed();
+ showToast('Recently viewed cleared');
+}
+function renderRecentlyViewed(){
+ const box=document.getElementById('recentViewedList');
+ if(!box)return;
+ const ids=JSON.parse(localStorage.getItem(RV_KEY)||'[]');
+ const list=ids.map(id=>getWallpaper(id)).filter(Boolean).slice(0,8);
+ box.innerHTML=list.map(w=>wfCard(w,'Recently viewed')).join('')||'<div class="text-xs text-muted p-4 card-bg rounded-2xl w-full text-center">No recently viewed yet</div>';
+}
+function renderRelatedWallpapers(w){
+ const box=document.getElementById('relatedWallpapersList');
+ if(!box||!w)return;
+ const list=wallpapers.filter(x=>x.cat===w.cat&&x.id!==w.id).slice(0,8);
+ box.innerHTML=list.map(x=>wfCard(x,'More like this')).join('')||'<div class="text-xs text-muted p-4 card-bg rounded-2xl w-full text-center">No related wallpapers</div>';
+}
+function renderCollections(){
+ const box=document.getElementById('collectionsList');
+ if(!box)return;
+ box.innerHTML=cats.slice(0,8).map(c=>{
+  const count=wallpapers.filter(w=>w.cat===c[0]).length;
+  return `<div class="collection-card p-4 cursor-pointer" onclick="filterCat('${c[0]}')">
+    <div class="collection-icon"><i class="fas ${c[1]}"></i></div>
+    <h4 class="text-sm text-main font-bold mt-3">${c[3]}</h4>
+    <p class="text-[10px] text-muted">${count} wallpapers</p>
+  </div>`;
+ }).join('');
+}
+function wfUpdateFeaturedUI(w){
+ const b=document.getElementById('detail-featured-badge');
+ if(!b)return;
+ b.classList.toggle('hidden',!(w&&w.featured));
+}
+function wfFeaturedList(){return wallpapers.filter(w=>w.featured)}
+function updateProfileAvatar(event){
+ const file=event.target.files&&event.target.files[0];
+ if(!file)return;
+ const reader=new FileReader();
+ reader.onload=()=>{localStorage.setItem(AVATAR_KEY,reader.result);applyProfileAvatar();showToast('Avatar updated')};
+ reader.readAsDataURL(file);
+}
+function applyProfileAvatar(){
+ const data=localStorage.getItem(AVATAR_KEY);
+ const img=document.getElementById('profileAvatarImg');
+ const letter=document.getElementById('profileAvatarLetter');
+ if(!img||!letter)return;
+ if(data){img.src=data;img.classList.remove('hidden');letter.classList.add('hidden')}
+ else{img.classList.add('hidden');letter.classList.remove('hidden')}
+}
+function updateProfileStatsExtra(){
+ const views=wallpapers.reduce((s,w)=>s+Number(w.views||0),0);
+ const pViews=document.getElementById('pViews'); if(pViews)pViews.textContent=fmt(views);
+ const uploads=document.getElementById('profileUploadsCount'); if(uploads)uploads.textContent=wallpapers.filter(w=>String(w.id).startsWith('up')).length;
+ const join=document.getElementById('profileJoinDate');
+ if(join){const key='wallflix_join_date';if(!localStorage.getItem(key))localStorage.setItem(key,new Date().toLocaleDateString());join.textContent=localStorage.getItem(key)}
+}
+async function adminToggleFeatured(){
+ if(!requireAdmin())return;const id=(document.getElementById('adminEditId')?.value||'').trim();if(!id){showToast('Select wallpaper first');return}const w=(typeof getWallpaper==='function'?getWallpaper(id):null)||wallpapers.find(x=>x.id===id);if(!w){showToast('Wallpaper not found');return}w.featured=!w.featured;try{await saveWallpaperFirestoreV44(w);await loadFirestoreWallpapersV44();rebuildAllViewsV44();setHeroWallpaperV44(id);selectAdminWallpaperV44(id);showToast(w.featured?'Featured enabled':'Featured disabled')}catch(e){console.error(e);showToast('Featured failed')}
+}
+
+
+function fixDailyWallpaper(){
+ const dailyImg=document.getElementById('daily-img');
+ if(!dailyImg)return;
+ const dayIndex=Math.abs(Math.floor(Date.now()/86400000))%Math.max(1,wallpapers.length);
+ const w=wallpapers[dayIndex]||wallpapers[2]||wallpapers[0];
+ if(!w)return;
+ selectedDailyImg=w.img;
+ dailyImg.src=w.img;
+ dailyImg.onerror=function(){
+  const fallback=wallpapers[0];
+  if(fallback&&fallback.img&&dailyImg.src!==fallback.img)dailyImg.src=fallback.img;
+ };
+ startDailyTimer();
+}
+
+
+function ensureSliderData(){
+ if(!Array.isArray(sliderData)||!sliderData.length)return;
+ for(let i=0;i<sliderData.length;i++){
+  if(!sliderData[i].img){
+   const w=wallpapers[i%wallpapers.length]||wallpapers[0];
+   if(w){sliderData[i].img=w.img;sliderData[i].title=w.title;sliderData[i].desc='Premium wallpaper';sliderData[i].id=w.id}
+  }
+ }
+}
+function forceHeroReady(){
+ ensureSliderData();
+ const bg=document.getElementById('slider-bg');
+ if(bg&&(!bg.style.backgroundImage||bg.style.backgroundImage==='none')){
+  const s=sliderData[currentSliderIndex]||sliderData[0]||{img:(wallpapers[0]||{}).img,title:'WallFlix',desc:'Premium wallpaper'};
+  bg.style.backgroundImage=`url('${s.img}')`;
+  const title=document.getElementById('slider-title'); if(title)title.textContent=s.title||'WallFlix';
+  const desc=document.getElementById('slider-desc'); if(desc)desc.textContent=s.desc||'Premium wallpaper';
+ }
+}
+
+
+function getDailyEndTime(){
+ const d=new Date();
+ d.setHours(24,0,0,0);
+ return d.getTime();
+}
+function updateDailyTimer(){
+ const el=document.getElementById('daily-timer');
+ if(!el)return;
+ let diff=Math.max(0,getDailyEndTime()-Date.now());
+ const h=String(Math.floor(diff/3600000)).padStart(2,'0');
+ diff%=3600000;
+ const m=String(Math.floor(diff/60000)).padStart(2,'0');
+ diff%=60000;
+ const s=String(Math.floor(diff/1000)).padStart(2,'0');
+ el.textContent=`${h}h : ${m}m : ${s}s`;
+}
+function startDailyTimer(){
+ updateDailyTimer();
+ if(window.wallflixDailyTimer)clearInterval(window.wallflixDailyTimer);
+ window.wallflixDailyTimer=setInterval(updateDailyTimer,1000);
+}
+function fixDailyWallpaper(){
+ const dailyImg=document.getElementById('daily-img');
+ if(!dailyImg)return;
+ const dayIndex=Math.abs(Math.floor(Date.now()/86400000))%Math.max(1,wallpapers.length);
+ const w=wallpapers[dayIndex]||wallpapers[2]||wallpapers[0];
+ if(!w)return;
+ selectedDailyImg=w.img;
+ dailyImg.src=w.img;
+ dailyImg.onerror=function(){
+  const fallback=wallpapers[0];
+  if(fallback&&fallback.img&&dailyImg.src!==fallback.img)dailyImg.src=fallback.img;
+ };
+ startDailyTimer();
+}
+
+
+var NOTIF_KEY='wallflix_notifications';
+
+function getNotifications(){
+ return JSON.parse(localStorage.getItem(NOTIF_KEY)||'[]');
+}
+function saveNotifications(list){
+ localStorage.setItem(NOTIF_KEY,JSON.stringify(list.slice(0,40)));
+ renderNotifications();
+ updateNotificationDot();
+}
+function addNotification(title,body,type='wallpaper'){
+ const list=getNotifications();
+ list.unshift({id:'n'+Date.now(),title,body,type,read:false,createdAt:Date.now()});
+ saveNotifications(list);
+}
+function updateNotificationDot(){
+ const dot=document.getElementById('notif-dot');
+ if(!dot)return;
+ const unreadCount=getNotifications().filter(n=>!n.read).length;
+ dot.classList.toggle('hidden',unreadCount===0);
+ const badge=document.getElementById('notif-badge');
+ if(badge){
+   badge.textContent=unreadCount;
+   badge.style.display=unreadCount>0?'flex':'none';
+ }
+}
+function timeAgo(ts){
+ const s=Math.max(1,Math.floor((Date.now()-Number(ts||Date.now()))/1000));
+ if(s<60)return s+'s ago';
+ const m=Math.floor(s/60); if(m<60)return m+'m ago';
+ const h=Math.floor(m/60); if(h<24)return h+'h ago';
+ return Math.floor(h/24)+'d ago';
+}
+function renderNotifications(){
+ const box=document.getElementById('notificationsList');
+ if(!box)return;
+ const list=getNotifications();
+ if(!list.length){
+  box.innerHTML='<div class="text-center text-muted text-xs p-6 card-bg rounded-2xl">No notifications yet</div>';
+  return;
+ }
+ box.innerHTML=list.map(n=>`<div class="notif-card">
+  <div class="notif-icon"><i class="fas ${n.type==='wallpaper'?'fa-image':'fa-bell'}"></i></div>
+  <div class="flex-1">
+    <div class="notif-title">${n.title||'WallFlix'}</div>
+    <div class="notif-text">${n.body||''}</div>
+    <div class="notif-time">${timeAgo(n.createdAt)}</div>
+  </div>
+  ${n.read?'':'<span class="w-2 h-2 rounded-full bg-purple-neon mt-2"></span>'}
+ </div>`).join('');
+}
+function markRead(){
+ let list=getNotifications();
+ list=list.map(n=>({...n,read:true}));
+ localStorage.setItem(NOTIF_KEY,JSON.stringify(list));
+ renderNotifications();
+ updateNotificationDot();
+ const badge=document.getElementById('notif-badge');
+ if(badge) badge.textContent='0';
+ showToast('All notifications marked as read');
+}
+function openNotifications(){
+ renderNotifications();
+ updateNotificationDot();
+ openModal('notifications-modal');
+}
+
+function getLang(){return localStorage.getItem(LS.lang)||'en'} function t(k){return (I18N[getLang()]&&I18N[getLang()][k])||I18N.en[k]||k}
+function favs(){return JSON.parse(localStorage.getItem(LS.fav)||'[]')} function downs(){return JSON.parse(localStorage.getItem(LS.down)||'[]')} function likes(){return JSON.parse(localStorage.getItem(LS.like)||'[]')} function saveLikes(a){localStorage.setItem(LS.like,JSON.stringify(a));updateCounts();saveUserCloud()} function saveFavs(a){localStorage.setItem(LS.fav,JSON.stringify(a));updateCounts();saveUserCloud()} function saveDowns(a){localStorage.setItem(LS.down,JSON.stringify(a));updateCounts();saveUserCloud()} function fmt(n){n=Number(n||0);return n>=1000000?(n/1000000).toFixed(1)+'M':n>=1000?(n/1000).toFixed(1)+'K':String(n)} function score(w){return Number(w.views||0)+Number(w.likes||0)*3+Number(w.downloads||0)*4} function getWallpaper(id){return wallpapers.find(w=>w.id===id)||sliderData.find(w=>w.id===id)}
+window.onload=()=>{applyTheme(localStorage.getItem(LS.theme)||'dark');buildLanguages();buildCats();applyProfileAvatar();loadLocalUploads();wfNormalizeRatings();buildWalls();refreshAdminSecretUI();initSlider();setupRandomDailyWallpaper();startCountdown();applyLanguage(getLang());initFirebaseAuth();loadFirebaseWallpapers();loadNotifications();setupPWA();document.addEventListener('touchstart',e=>{if(e.touches.length>1)e.preventDefault()},{passive:false})};
+function applyLanguage(code){localStorage.setItem(LS.lang,code);let l=languages.find(x=>x[0]===code)||languages[0];document.documentElement.lang=code;document.documentElement.dir=l[3];document.querySelectorAll('[data-i18n]').forEach(e=>e.textContent=t(e.dataset.i18n));document.querySelectorAll('[data-i18n-placeholder]').forEach(e=>e.placeholder=t(e.dataset.i18nPlaceholder));buildLanguages();updateCounts();closeModal('language-modal')}
+function buildLanguages(){let box=document.getElementById('languageList');if(!box)return;box.innerHTML='';languages.forEach(l=>{let active=getLang()===l[0];box.innerHTML+=`<button onclick="applyLanguage('${l[0]}')" class="flex items-center justify-between p-3 card-bg rounded-xl text-sm font-semibold text-main w-full border border-main"><span class="flex items-center gap-3"><span class="text-xl">${l[1]}</span>${l[2]}</span><i class="${active?'fas fa-check-circle text-purple-500':'far fa-circle text-zinc-600'}"></i></button>`})}
+function applyTheme(mode){localStorage.setItem(LS.theme,mode);document.body.classList.toggle('light',mode==='light');document.querySelector('meta[name=theme-color]').setAttribute('content',mode==='light'?'#f6f2ff':'#0c0c0e');document.getElementById('top-theme-icon').className=mode==='light'?'far fa-sun text-xl':'far fa-moon text-xl';document.getElementById('menu-theme-icon').className=mode==='light'?'far fa-sun text-muted w-5':'far fa-moon text-muted w-5';document.getElementById('theme-label').textContent=mode==='light'?t('lightTheme'):t('darkTheme');document.getElementById('theme-knob').style.marginLeft=mode==='light'?'0':'auto'}
+function toggleTheme(){applyTheme((localStorage.getItem(LS.theme)||'dark')==='dark'?'light':'dark')}
+
+function loadLocalUploads(){
+ try{
+  const saved=JSON.parse(localStorage.getItem('wallflix_local_uploads')||'[]');
+  if(Array.isArray(saved)&&saved.length){wallpapers=[...saved,...wallpapers.filter(w=>!saved.some(s=>s.id===w.id||s.img===w.img))]}
+ }catch(e){console.warn(e)}
+}
+
+
+function isAdmin(){
+ return adminUnlocked || isAdminSaved() || (currentUser && ['zakziko168@gmail.com','wallflix2@gmail.com'].includes(currentUser.email));
+}
+function requireAdmin(){
+ if(isAdmin())return true;
+ openModal('admin-access-modal');
+ return false;
+}
+function unlockAdminAccess(){
+ const code=(document.getElementById('adminAccessSecret').value||'').trim();
+ if(code===ADMIN_SECRET){
+  adminUnlocked=true;
+  localStorage.setItem(LS.admin,'1');
+  document.getElementById('adminAccessSecret').value='';
+  closeModal('admin-access-modal');
+  closeMenu();
+  refreshAdminSecretUI();
+  renderAdminDashboard();
+  switchTab('admin');
+  showToast('Admin unlocked');
+ }else showToast(t('wrongSecret')||'Wrong admin secret');
+}
+function openAdminDashboard(){
+ if(!requireAdmin())return;
+ closeMenu();
+ renderAdminDashboard();
+ switchTab('admin');
+}
+
+/* V39 Admin Buttons Fixed */
+const WALLFLIX_ADMIN_LOCAL_KEY_V39='wallflix_admin_saved_wallpapers_v39';
+
+function getAdminSavedWallpapersV39(){
+ try{return JSON.parse(localStorage.getItem(WALLFLIX_ADMIN_LOCAL_KEY_V39)||'[]')}catch(e){return []}
+}
+function setAdminSavedWallpapersV39(list){
+ try{localStorage.setItem(WALLFLIX_ADMIN_LOCAL_KEY_V39,JSON.stringify((list||[]).slice(0,300)))}catch(e){console.warn('admin local save failed',e)}
+}
+function saveAdminWallpaperV39(w){
+ if(!w||!w.id)return;
+ const list=getAdminSavedWallpapersV39().filter(x=>x.id!==w.id && x.img!==w.img);
+ list.unshift({...w,localUpload:w.localUpload||String(w.id).startsWith('up')||String(w.id).startsWith('urlup_')});
+ setAdminSavedWallpapersV39(list);
+ try{
+  if(typeof saveUrlUploadV38==='function' && (w.urlUpload||String(w.id).startsWith('urlup_'))) saveUrlUploadV38(w);
+ }catch(e){}
+}
+function deleteAdminWallpaperV39(id){
+ if(!id)return;
+ setAdminSavedWallpapersV39(getAdminSavedWallpapersV39().filter(w=>w.id!==id));
+ try{
+  if(typeof getUrlUploadsV38==='function' && typeof setUrlUploadsV38==='function'){
+    setUrlUploadsV38(getUrlUploadsV38().filter(w=>w.id!==id));
+  }
+ }catch(e){}
+ try{
+  const old=JSON.parse(localStorage.getItem('wallflix_local_uploads')||'[]').filter(w=>w.id!==id);
+  localStorage.setItem('wallflix_local_uploads',JSON.stringify(old));
+ }catch(e){}
+}
+function mergeAdminSavedWallpapersV39(){
+ if(!Array.isArray(window.wallpapers))return;
+ const saved=getAdminSavedWallpapersV39();
+ const map=new Map();
+ saved.forEach(w=>{if(w&&w.id)map.set(w.id,w)});
+ wallpapers.forEach(w=>{if(w&&w.id&&!map.has(w.id))map.set(w.id,w)});
+ wallpapers=Array.from(map.values());
+}
+function setAdminEditFieldsV39(w){
+ if(!w)return false;
+ const idEl=document.getElementById('adminEditId');
+ const titleEl=document.getElementById('adminEditTitle');
+ const catEl=document.getElementById('adminEditCat');
+ if(idEl)idEl.value=w.id||'';
+ if(titleEl)titleEl.value=w.title||'';
+ if(catEl)catEl.value=w.cat||'anime';
+ document.querySelectorAll('.admin-wall-row').forEach(r=>r.classList.toggle('selected',r.dataset.id===w.id));
+ return true;
+}
+
+function renderAdminDashboard(){
+ mergeWallpapersV44(wallpapers);
+ const totalViews=wallpapers.reduce((s,w)=>s+Number(w.views||0),0),totalLikes=wallpapers.reduce((s,w)=>s+Number(w.likes||0),0),totalDown=wallpapers.reduce((s,w)=>s+Number(w.downloads||0),0);
+ const set=(id,val)=>{const e=document.getElementById(id);if(e)e.textContent=fmt(val)};set('adminWallCount',wallpapers.length);set('adminViewsCount',totalViews);set('adminLikesCount',totalLikes);set('adminDownCount',totalDown);
+ const list=document.getElementById('adminWallList');if(list){list.innerHTML=wallpapers.map(w=>`<div class="admin-wall-row card-bg border border-main rounded-2xl p-3 flex gap-3 items-center" data-id="${w.id}" onclick="selectAdminWallpaperV44('${w.id}')"><img src="${w.img}" class="w-16 h-16 rounded-xl object-cover" onerror="this.style.display='none'"><div class="flex-1 min-w-0"><h4 class="text-xs font-bold text-main truncate">${w.title||'Untitled'}</h4><p class="text-[10px] text-muted">${w.cat||'anime'} • 👁 ${fmt(w.views||0)} • ❤️ ${fmt(w.likes||0)} • ⬇ ${fmt(w.downloads||0)} ${w.featured?' • ⭐ Featured':''}</p><p class="text-[9px] text-muted truncate">${w.id}</p></div><button onclick="event.stopPropagation();selectAdminWallpaperV44('${w.id}')" class="w-9 h-9 rounded-xl bg-purple-500/15 text-purple-400"><i class="fas fa-pen"></i></button></div>`).join('')||emptyBox()}
+ try{if(typeof updateAnalyticsProV40==='function')updateAnalyticsProV40()}catch(e){}
+}
+function adminSelectWallpaper(id){
+ mergeAdminSavedWallpapersV39();
+ const w=getWallpaper(id)||wallpapers.find(x=>x.id===id);
+ if(!w){showToast('Wallpaper not found');return}
+ setAdminEditFieldsV39(w);
+ showToast('Selected: '+(w.title||'Wallpaper'));
+}
+async function adminSaveEdit(){
+ if(!requireAdmin())return;const id=(document.getElementById('adminEditId')?.value||'').trim(),title=(document.getElementById('adminEditTitle')?.value||'').trim(),cat=(document.getElementById('adminEditCat')?.value||'anime').trim();if(!id){showToast('Select wallpaper first');return}const w=(typeof getWallpaper==='function'?getWallpaper(id):null)||wallpapers.find(x=>x.id===id);if(!w){showToast('Wallpaper not found');return}w.title=title||w.title||'WallFlix Wallpaper';w.cat=cat||w.cat||'anime';try{await saveWallpaperFirestoreV44(w);await loadFirestoreWallpapersV44();rebuildAllViewsV44();selectAdminWallpaperV44(id);showToast('Saved to Firestore')}catch(e){console.error(e);showToast('Save failed')}
+}
+async function adminDeleteSelected(){
+ if(!requireAdmin())return;const id=(document.getElementById('adminEditId')?.value||'').trim();if(!id){showToast('Select wallpaper first');return}if(!confirm('Delete this wallpaper?'))return;try{if(fbReady&&db)await db.collection('wallpapers').doc(id).delete();removeBackupWallpaperV44(id);wallpapers=wallpapers.filter(x=>x.id!==id);const i=document.getElementById('adminEditId');if(i)i.value='';const t=document.getElementById('adminEditTitle');if(t)t.value='';rebuildAllViewsV44();showToast('Deleted from Firestore')}catch(e){console.error(e);showToast('Delete failed')}
+}
+function saveLocalUploadsIfNeeded(){
+ try{
+  const local=wallpapers.filter(w=>String(w.id).startsWith('up')||String(w.id).startsWith('urlup_')||w.localUpload||w.urlUpload);
+  localStorage.setItem('wallflix_local_uploads',JSON.stringify(local.slice(0,100)));
+  local.forEach(w=>saveAdminWallpaperV39(w));
+ }catch(e){console.warn(e)}
+}
+function adminSendNotification(){}
+function renderNotifications(){
+ const box=document.getElementById('notificationsList'); if(!box)return;
+ const items=notifications.length?notifications:[{title:t('notifTitle'),desc:t('notifDesc'),read:false}];
+ box.innerHTML=items.map(n=>`<div class="card-bg p-3 rounded-xl flex gap-3 relative border border-main">
+  <div class="text-orange-500 text-base mt-0.5"><i class="fas fa-fire"></i></div>
+  <div><h4 class="text-xs font-bold text-main">${n.title}</h4><p class="text-[10px] text-muted mt-0.5">${n.desc}</p></div>
+  ${n.read?'':'<span class="notif-unread w-1.5 h-1.5 bg-purple-neon rounded-full absolute top-4 right-4"></span>'}
+ </div>`).join('');
+ const dot=document.getElementById('notif-dot'); if(dot)dot.style.display=items.some(n=>!n.read)?'block':'none';
+}
+async function loadNotifications(){
+ notifications=[];
+ try{
+  if(fbReady&&db){
+   const snap=await db.collection('notifications').orderBy('createdAt','desc').limit(20).get();
+   snap.forEach(doc=>{let d=doc.data();notifications.push({id:doc.id,title:d.title||'WallFlix',desc:d.desc||'',read:false})});
+  }
+ }catch(e){console.warn('Notifications:',e)}
+ renderNotifications();
+}
+
+function buildCats(){let h=document.getElementById('homeCats'),e=document.getElementById('exploreCats');h.innerHTML='';e.innerHTML='';cats.slice(0,4).forEach(c=>h.innerHTML+=catSmall(c));cats.forEach(c=>e.innerHTML+=`<button onclick="filterCat('${c[0]}')" class="card-bg p-4 rounded-2xl flex flex-col items-center justify-center text-center h-28 border border-main"><i class="fas ${c[1]} ${c[2]} text-2xl mb-2"></i><span class="text-xs font-bold text-main">${c[3]}</span></button>`)}
+function catSmall(c){return`<button onclick="filterCat('${c[0]}')" class="card-bg p-3 rounded-xl flex flex-col items-center gap-1 text-center"><i class="fas ${c[1]} ${c[2]} text-lg"></i><span class="text-[10px] font-medium text-muted">${c[3]}</span></button>`}
+function wallCard(w,i){let fav=favs().includes(w.id)?'fas':'far';let liked=likes().includes(w.id)?'fas':'far';return`<div class="wall-card relative h-52 card-bg rounded-2xl overflow-hidden cursor-pointer border border-main premium-glow" onclick="openDetailModal('${w.id}')"><img src="${w.img}" class="w-full h-full object-cover"><div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent"></div><span class="absolute top-2 left-2 min-w-7 h-7 rank-fire text-white text-[10px] font-bold rounded-lg flex items-center justify-center px-2"><i class="fas fa-fire mr-1"></i>${i+1}</span><button onclick="event.stopPropagation();toggleFavorite('${w.id}')" class="absolute top-2 right-2 w-8 h-8 bg-black/45 backdrop-blur rounded-full text-white"><i class="${fav} fa-heart"></i></button><div class="absolute bottom-2 left-2 right-2"><h4 class="text-xs font-bold text-white truncate">${w.title}</h4><p class="text-[10px] text-zinc-300 uppercase tracking-wide">${w.cat}</p><div class="flex flex-wrap gap-1.5 text-[9px] text-white mt-1"><span class="stat-chip"><i class="fas fa-eye text-cyan-300"></i>${fmt(w.views)}</span><span class="stat-chip"><i class="${liked} fa-heart text-pink-400"></i>${fmt(w.likes)}</span><span class="stat-chip"><i class="fas fa-download text-purple-300"></i>${fmt(w.downloads)}</span></div></div></div>`}
+function trendingWalls(limit=6){return [...wallpapers].sort((a,b)=>score(b)-score(a)).slice(0,limit)}
+function buildWalls(list=wallpapers){
+ wallpapers=mergeUrlUploadsV38(wallpapers);
+ const finalList=Array.isArray(list)?mergeUrlUploadsV38(list):wallpapers;
+ const grid=document.getElementById('wallGrid');
+ if(grid)grid.innerHTML=finalList.map(wallCard).join('')||emptyBox();
+ renderLists();
+ renderAdminDashboard();
+ wfRenderTopRated();
+ if(typeof renderRecentlyViewed==='function')renderRecentlyViewed();
+ if(typeof renderTrendingPremium==='function')renderTrendingPremium();
+ if(typeof renderSearchChips==='function')renderSearchChips();
+ if(typeof updateProfileStatsExtra==='function')updateProfileStatsExtra();
+ if(typeof profileAchievements==='function')profileAchievements();
+ if(typeof fixDailyWallpaper==='function')fixDailyWallpaper();
+ if(typeof forceHeroReady==='function')forceHeroReady();
+ if(typeof bootV28==='function')setTimeout(bootV28,50);
+}
+function renderLists(){let f=wallpapers.filter(w=>favs().includes(w.id)),d=wallpapers.filter(w=>downs().includes(w.id));document.getElementById('favGrid').innerHTML=f.map(wallCard).join('')||emptyBox();document.getElementById('downGrid').innerHTML=d.map(wallCard).join('')||emptyBox();updateCounts()}
+function emptyBox(){return`<div class="col-span-2 text-center text-muted card-bg p-8 rounded-2xl border border-main">${t('empty')}</div>`}
+function filterCat(cat){switchTab('explore');buildWalls(wallpapers.filter(w=>w.cat===cat));showToast(cat)}
+function searchWallpapers(){}
+function updateCounts(){let f=favs().length,d=downs().length;['favCountMenu','pFav'].forEach(id=>{let e=document.getElementById(id);if(e)e.textContent=f});let pd=document.getElementById('pDown');if(pd)pd.textContent=d;let pl=document.getElementById('profileTotalLikes');if(pl)pl.textContent=likes().length;let pe2=document.getElementById('profileEmail2');if(pe2)pe2.textContent=currentUser?currentUser.email:'Guest';let pfs=document.getElementById('profileFirebaseStatus');if(pfs)pfs.textContent=fbReady?'Ready':'Offline';let lab=document.getElementById('theme-label');if(lab)lab.textContent=(localStorage.getItem(LS.theme)==='light')?t('lightTheme'):t('darkTheme')}
+function initSlider(){
+ const featured=(typeof wfFeaturedList==='function'?wfFeaturedList():[]);
+ if(featured&&featured.length){
+  sliderData.splice(0,sliderData.length,...featured.slice(0,3).map(w=>({title:w.title,desc:'Featured wallpaper',img:w.img,id:w.id})));
+ }
+ ensureSliderData();
+ currentSliderIndex=0;
+ updateSlider();
+ clearInterval(sliderInterval);
+ sliderInterval=setInterval(nextSlide,5000);
+ setTimeout(forceHeroReady,300);
+}
+function nextSlide(){
+ currentSliderIndex=(currentSliderIndex+1)%sliderData.length;
+ updateSlider();
+}
+function updateSlider(){
+ ensureSliderData();
+ const s=sliderData[currentSliderIndex]||sliderData[0]||{img:(wallpapers[0]||{}).img,title:'WallFlix',desc:'Premium wallpaper'};
+ const bg=document.getElementById('slider-bg');
+ const title=document.getElementById('slider-title');
+ const desc=document.getElementById('slider-desc');
+ const dots=document.getElementById('slider-dots');
+ const progress=document.getElementById('slider-progress');
+ if(bg){
+  bg.style.backgroundImage=`url('${s.img}')`;
+  bg.style.backgroundSize='cover';
+  bg.style.backgroundPosition='center';
+ }
+ if(title)title.textContent=s.title||'WallFlix';
+ if(desc)desc.textContent=s.desc||'Premium wallpaper';
+ if(dots)dots.innerHTML=sliderData.map((_,i)=>`<span class="w-2 h-2 rounded-full ${i===currentSliderIndex?'bg-purple-neon':'bg-white/40'}"></span>`).join('');
+ if(progress){
+  progress.style.transition='none';
+  progress.style.width='0%';
+  requestAnimationFrame(()=>setTimeout(()=>{progress.style.transition='width 5s linear';progress.style.width='100%'},30));
+ }
+}
+function setupRandomDailyWallpaper(){let r=Math.floor(Math.random()*wallpapers.length);selectedDailyImg=wallpapers[r].img;document.getElementById('daily-img').src=selectedDailyImg}
+function startCountdown(){let h=8,m=34,s=12;setInterval(()=>{s--;if(s<0){s=59;m--}if(m<0){m=59;h--}document.getElementById('daily-timer').textContent=`${String(h).padStart(2,'0')}h : ${String(m).padStart(2,'0')}m : ${String(s).padStart(2,'0')}s`},1000)}
+function openMenu(){
+ const menu=document.getElementById('side-menu');
+ const content=document.getElementById('menu-content');
+ if(!menu||!content){alert('Menu not found');return;}
+ menu.classList.remove('menu-closed','invisible','opacity-0','hidden');
+ menu.classList.add('menu-open');
+ menu.style.visibility='visible';
+ menu.style.opacity='1';
+ menu.style.pointerEvents='auto';
+ menu.style.display='block';
+ content.classList.remove('translate-x-full');
+ content.style.transform='translateX(0)';
+ content.style.right='0';
+ content.style.left='auto';
+}
+function closeMenu(){
+ const menu=document.getElementById('side-menu');
+ const content=document.getElementById('menu-content');
+ if(!menu||!content)return;
+ content.style.transform='translateX(100%)';
+ content.classList.add('translate-x-full');
+ menu.classList.add('menu-closed');
+ menu.classList.remove('menu-open');
+ menu.style.opacity='0';
+ menu.style.pointerEvents='none';
+ setTimeout(()=>{menu.style.visibility='hidden'},300);
+}
+function openModal(id){
+ const el=document.getElementById(id);
+ if(!el)return;
+ if(id==='auth-modal')updateAuthModalUI();
+ el.classList.add('modal-open');
+ if(id==='auth-modal')setTimeout(updateAuthModalUI,50);
+} function closeModal(id){let m=document.getElementById(id);if(m)m.classList.remove('modal-open')}
+function switchTab(tab){document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));document.getElementById(tab+'-page').classList.remove('hidden');if(tab==='admin')renderAdminDashboard();document.querySelectorAll('.tab').forEach(t=>{t.classList.remove('active-tab');t.classList.add('inactive-tab')});let b=document.getElementById('tab-'+tab);if(b){b.classList.add('active-tab');b.classList.remove('inactive-tab')}}
+function openDetailModal(id){
+ let w;
+ if(id==='slider')w=getWallpaper(sliderData[currentSliderIndex].id)||wallpapers[currentSliderIndex]||wallpapers[0];
+ else if(id==='daily')w=wallpapers.find(x=>x.img===selectedDailyImg)||wallpapers[0];
+ else w=getWallpaper(id);
+ if(!w)return;
+ currentDetailId=w.id;
+ w.views=Number(w.views||0)+1;
+ syncWallpaperStats(w.id,{views:w.views},false);
+ document.getElementById('detail-img-view').src=w.img;
+ document.getElementById('detail-title').textContent=w.title;
+ updateDetailStats(w);
+ wfUpdateRatingAverage();
+ if(typeof wfUpdateFeaturedUI==='function')wfUpdateFeaturedUI(w);
+ if(typeof renderRelatedWallpapers==='function')renderRelatedWallpapers(w);
+ if(typeof addRecentlyViewed==='function')addRecentlyViewed(w.id);
+ document.getElementById('detail-modal').classList.remove('hidden');
+ setTimeout(()=>document.getElementById('detail-modal').classList.add('modal-open'),10);
+}
+function updateDetailStats(item=getWallpaper(currentDetailId)){if(!item)return;let old=document.getElementById('detail-stats');if(old)old.remove();let box=document.createElement('div');box.id='detail-stats';box.className='grid grid-cols-3 gap-2 mb-3 text-center';box.innerHTML=`<button onclick="likeWallpaper(currentDetailId)" class="card-bg border border-main rounded-xl py-2 text-[11px] text-main"><i class="${likes().includes(item.id)?'fas':'far'} fa-heart text-pink-500"></i><br><b id="detail-like-count">${fmt(item.likes)}</b></button><div class="card-bg border border-main rounded-xl py-2 text-[11px] text-main"><i class="fas fa-eye text-cyan-400"></i><br><b id="detail-view-count">${fmt(item.views)}</b></div><div class="card-bg border border-main rounded-xl py-2 text-[11px] text-main"><i class="fas fa-download text-purple-400"></i><br><b id="detail-down-count">${fmt(item.downloads)}</b></div>`;let p=document.querySelector('#detail-modal .p-5 p');if(p)p.insertAdjacentElement('afterend',box)}
+function closeDetailModal(){let m=document.getElementById('detail-modal');m.classList.add('opacity-0');setTimeout(()=>{m.classList.add('hidden');m.style.display='none'},250)}
+function toggleFavorite(id){let a=favs();if(a.includes(id)){a=a.filter(x=>x!==id);showToast(t('removedFav'))}else{a.push(id);showToast(t('addedFav'))}saveFavs(a);if(document.getElementById('detail-heart'))document.getElementById('detail-heart').className=(a.includes(id)?'fas':'far')+' fa-heart';buildWalls()}
+async function likeWallpaper(id){let w=getWallpaper(id);if(!w)return;let a=likes();if(a.includes(id)){a=a.filter(x=>x!==id);w.likes=Math.max(0,Number(w.likes||0)-1);showToast('Like removed')}else{a.push(id);w.likes=Number(w.likes||0)+1;showToast('Liked')}saveLikes(a);syncWallpaperStats(id,{likes:w.likes},false);updateDetailStats(w);wfUpdateRatingAverage();buildWalls()}
+async function syncWallpaperStats(id,data,incrementView=false){if(!fbReady||!db||!id||id==='daily')return;try{let payload={...data,score:score(getWallpaper(id)||{}),updatedAt:firebase.firestore.FieldValue.serverTimestamp()};if(incrementView)payload={views:firebase.firestore.FieldValue.increment(1),updatedAt:firebase.firestore.FieldValue.serverTimestamp()};await db.collection('wallpapers').doc(id).set(payload,{merge:true})}catch(e){console.warn('Stats sync:',e)}}
+async function shareWallpaper(){
+ const w=getWallpaper(currentDetailId);
+ if(!w){showToast('No wallpaper selected');return}
+ const title=w.title||'WallFlix Wallpaper';
+ const text=title+' - WallFlix Premium';
+ const pageUrl=location.origin+location.pathname+'?wallpaper='+encodeURIComponent(w.id);
+ try{
+  if(w.img && String(w.img).startsWith('data:image') && navigator.canShare){
+   const res=await fetch(w.img);
+   const blob=await res.blob();
+   const cleanName=(title.replace(/[^a-z0-9_-]+/gi,'_')||'wallflix')+'.png';
+   const file=new File([blob],cleanName,{type:blob.type||'image/png'});
+   if(navigator.canShare({files:[file]})){
+    await navigator.share({title:title,text:text,files:[file]});
+    return;
+   }
+  }
+  if(navigator.share){
+   await navigator.share({title:title,text:text,url:(w.img&&String(w.img).startsWith('http'))?w.img:pageUrl});
+   return;
+  }
+  if(navigator.clipboard){
+   await navigator.clipboard.writeText((w.img&&String(w.img).startsWith('http'))?w.img:pageUrl);
+   showToast('Link copied');
+   return;
+  }
+  showToast('Share not supported');
+ }catch(e){
+  console.warn('Share failed:',e);
+  try{
+   if(navigator.clipboard){
+    await navigator.clipboard.writeText((w.img&&String(w.img).startsWith('http'))?w.img:pageUrl);
+    showToast('Link copied');
+   }else showToast('Share cancelled');
+  }catch(err){showToast('Share cancelled')}
+ }
+}
+
+function previewUploadFile(event){
+ const file=event.target.files&&event.target.files[0];
+ if(!file)return;
+ if(!file.type.startsWith('image/')){showToast('Choose image file');return}
+ if(file.size>1800000){showToast('Image too large. Use under 1.8MB');return}
+ const reader=new FileReader();
+ reader.onload=e=>{
+  uploadImageData=e.target.result;
+  const img=document.getElementById('uploadPreview');
+  if(img){img.src=uploadImageData;img.classList.remove('hidden')}
+ };
+ reader.readAsDataURL(file);
+}
+
+function downloadWallpaper(id){
+ let a=downs();if(!a.includes(id))a.push(id);saveDowns(a);
+ let item=getWallpaper(id)||sliderData[currentSliderIndex];
+ if(item){
+  item.downloads=Number(item.downloads||0)+1;
+  syncWallpaperStats(id,{downloads:item.downloads},false);
+  let link=document.createElement('a');
+  link.href=item.img;
+  link.download=(item.title||'wallflix').replace(/[^a-z0-9_-]+/gi,'_')+'.jpg';
+  if(!(item.img&&String(item.img).startsWith('data:image')))link.target='_blank';
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  updateDetailStats(item);
+  buildWalls();
+ }
+ showToast(t('downloaded'));
+}
+function openUpload(){
+ refreshAdminSecretUI();
+ openModal('upload-modal');
+}
+
+/* V38 Firebase Merge Upload Fix */
+const WALLFLIX_URL_UPLOADS_V38='wallflix_url_uploads_v38';
+
+function getUrlUploadsV38(){
+ try{return JSON.parse(localStorage.getItem(WALLFLIX_URL_UPLOADS_V38)||'[]')}catch(e){return []}
+}
+function setUrlUploadsV38(list){
+ try{localStorage.setItem(WALLFLIX_URL_UPLOADS_V38,JSON.stringify((list||[]).slice(0,300)))}catch(e){console.warn('URL uploads save failed',e)}
+}
+function saveUrlUploadV38(item){
+ const list=getUrlUploadsV38();
+ const clean=list.filter(w=>w.id!==item.id && w.img!==item.img);
+ clean.unshift(item);
+ setUrlUploadsV38(clean);
+}
+function mergeUrlUploadsV38(base){
+ const uploadList=getUrlUploadsV38().sort((a,b)=>Number(b.createdAt||0)-Number(a.createdAt||0));
+ let arr=Array.isArray(base)?base:(Array.isArray(window.wallpapers)?window.wallpapers:[]);
+ const seen=new Set();
+ const merged=[];
+ uploadList.forEach(w=>{
+  if(w&&w.img&&!seen.has(w.img)){
+   merged.push(w);
+   seen.add(w.img);
+  }
+ });
+ arr.forEach(w=>{
+  if(w&&w.img&&!seen.has(w.img)){
+   merged.push(w);
+   seen.add(w.img);
+  }
+ });
+ window.wallpapers=merged;
+ return merged;
+}
+
+
+/* V42 Auto Upload View Fixed */
+const WALLFLIX_V42_STORE='wallflix_v42_persistent_wallpapers';
+let wallflixLastUploadedIdV42=null;
+function getPersistedWallpapersV42(){try{return JSON.parse(localStorage.getItem(WALLFLIX_V42_STORE)||'[]')}catch(e){return []}}
+function setPersistedWallpapersV42(list){try{localStorage.setItem(WALLFLIX_V42_STORE,JSON.stringify((list||[]).slice(0,500)))}catch(e){console.warn(e)}}
+function persistWallpaperV42(w){if(!w||!w.id||!w.img)return;const list=getPersistedWallpapersV42().filter(x=>x.id!==w.id&&x.img!==w.img);list.unshift({...w,localUpload:true});setPersistedWallpapersV42(list)}
+function removePersistedWallpaperV42(id){setPersistedWallpapersV42(getPersistedWallpapersV42().filter(w=>w.id!==id))}
+function mergePersistedWallpapersV42(base){const saved=getPersistedWallpapersV42();const arr=Array.isArray(base)?base:(Array.isArray(window.wallpapers)?window.wallpapers:[]);const map=new Map();saved.forEach(w=>{if(w&&w.id)map.set(w.id,w)});arr.forEach(w=>{if(w&&w.id&&!map.has(w.id))map.set(w.id,w)});window.wallpapers=Array.from(map.values());return window.wallpapers}
+function refreshAllWallpaperViewsV42(){mergePersistedWallpapersV42(wallpapers);try{renderLists()}catch(e){}try{renderAdminDashboard()}catch(e){}try{renderTrendingPremium()}catch(e){}try{renderRecentlyViewed()}catch(e){}try{wfRenderTopRated()}catch(e){}try{renderCollectionsV41()}catch(e){}try{renderWeekWallpaperV40()}catch(e){}try{initSlider()}catch(e){}try{forceHeroReady()}catch(e){}}
+function openUploadedWallpaperV42(id){mergePersistedWallpapersV42(wallpapers);const w=wallpapers.find(x=>x.id===id);if(w&&typeof openDetailModal==='function')openDetailModal(w.id)}
+function setHeroToUploadedV42(id){mergePersistedWallpapersV42(wallpapers);const w=wallpapers.find(x=>x.id===id);if(!w)return;const bg=document.getElementById('slider-bg'),t=document.getElementById('slider-title'),d=document.getElementById('slider-desc');if(bg)bg.style.backgroundImage=`url('${w.img}')`;if(t)t.textContent=w.title||'Wallpaper';if(d)d.textContent=w.cat||'WallFlix';wallflixLastUploadedIdV42=id}
+function selectAdminWallpaperV42(id){mergePersistedWallpapersV42(wallpapers);const w=(typeof getWallpaper==='function'?getWallpaper(id):null)||wallpapers.find(x=>x.id===id);if(!w){showToast('Wallpaper not found');return}document.getElementById('adminEditId').value=w.id||'';document.getElementById('adminEditTitle').value=w.title||'';document.getElementById('adminEditCat').value=w.cat||'anime';document.querySelectorAll('.admin-wall-row').forEach(r=>r.classList.toggle('selected',r.dataset.id===id));showToast('Selected: '+(w.title||'Wallpaper'))}
+
+
+/* V44 Firestore Stable Sync */
+const WALLFLIX_V44_LOCAL='wallflix_v44_local_backup';
+let wallflixLastOpenedIdV44=null;
+function normalizeWallpaperV44(w,id){if(!w)return null;return {id:id||w.id||('wp_'+Date.now()),title:w.title||'WallFlix Wallpaper',cat:w.cat||w.category||'anime',img:w.img||w.url||w.image||w.imageUrl||'',views:Number(w.views||0),likes:Number(w.likes||0),downloads:Number(w.downloads||0),ratingTotal:Number(w.ratingTotal||0),ratingCount:Number(w.ratingCount||0),featured:!!w.featured,createdAt:w.createdAt&&w.createdAt.toMillis?w.createdAt.toMillis():(Number(w.createdAt)||Date.now()),localUpload:!!w.localUpload,urlUpload:!!w.urlUpload}}
+function getLocalBackupV44(){try{return JSON.parse(localStorage.getItem(WALLFLIX_V44_LOCAL)||'[]')}catch(e){return []}}
+function setLocalBackupV44(list){try{localStorage.setItem(WALLFLIX_V44_LOCAL,JSON.stringify((list||[]).slice(0,500)))}catch(e){console.warn('V44 local save failed',e)}}
+function mergeWallpapersV44(base){const arr=Array.isArray(base)?base:(Array.isArray(window.wallpapers)?window.wallpapers:[]);const backup=getLocalBackupV44();const map=new Map();backup.forEach(w=>{w=normalizeWallpaperV44(w);if(w&&w.id&&w.img)map.set(w.id,w)});arr.forEach(w=>{w=normalizeWallpaperV44(w);if(w&&w.id&&w.img)map.set(w.id,w)});window.wallpapers=Array.from(map.values()).sort((a,b)=>Number(b.createdAt||0)-Number(a.createdAt||0));return window.wallpapers}
+function backupWallpaperV44(w){w=normalizeWallpaperV44(w);if(!w||!w.id||!w.img)return;const list=getLocalBackupV44().filter(x=>x.id!==w.id&&x.img!==w.img);list.unshift(w);setLocalBackupV44(list)}
+function removeBackupWallpaperV44(id){setLocalBackupV44(getLocalBackupV44().filter(w=>w.id!==id))}
+async function saveWallpaperFirestoreV44(w){w=normalizeWallpaperV44(w);if(!w||!w.img)throw new Error('Missing image URL');backupWallpaperV44(w);if(fbReady&&db){await db.collection('wallpapers').doc(w.id).set({title:w.title,cat:w.cat,img:w.img,views:Number(w.views||0),likes:Number(w.likes||0),downloads:Number(w.downloads||0),ratingTotal:Number(w.ratingTotal||0),ratingCount:Number(w.ratingCount||0),featured:!!w.featured,createdAt:w.createdAt||Date.now(),updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true})}return w}
+async function loadFirestoreWallpapersV44(){let cloud=[];if(fbReady&&db){try{const snap=await db.collection('wallpapers').orderBy('createdAt','desc').limit(200).get();snap.forEach(doc=>{const w=normalizeWallpaperV44(doc.data(),doc.id);if(w&&w.img)cloud.push(w)})}catch(e){console.warn('V44 Firestore load failed:',e)}}mergeWallpapersV44([...cloud,...(Array.isArray(window.wallpapers)?window.wallpapers:[])]);return wallpapers}
+function rebuildAllViewsV44(){mergeWallpapersV44(wallpapers);try{renderLists()}catch(e){}try{renderAdminDashboard()}catch(e){}try{renderTrendingPremium()}catch(e){}try{renderRecentlyViewed()}catch(e){}try{wfRenderTopRated()}catch(e){}try{initSlider()}catch(e){}try{forceHeroReady()}catch(e){}try{fixDailyWallpaper()}catch(e){}}
+function selectAdminWallpaperV44(id){mergeWallpapersV44(wallpapers);const w=(typeof getWallpaper==='function'?getWallpaper(id):null)||wallpapers.find(x=>x.id===id);if(!w){showToast('Wallpaper not found');return}document.getElementById('adminEditId').value=w.id||'';document.getElementById('adminEditTitle').value=w.title||'';document.getElementById('adminEditCat').value=w.cat||'anime';document.querySelectorAll('.admin-wall-row').forEach(r=>r.classList.toggle('selected',r.dataset.id===id));showToast('Selected: '+(w.title||'Wallpaper'))}
+function setHeroWallpaperV44(id){const w=wallpapers.find(x=>x.id===id);if(!w)return;const bg=document.getElementById('slider-bg'),title=document.getElementById('slider-title'),desc=document.getElementById('slider-desc');if(bg)bg.style.backgroundImage=`url('${w.img}')`;if(title)title.textContent=w.title||'Wallpaper';if(desc)desc.textContent=w.cat||'WallFlix';wallflixLastOpenedIdV44=id}
+function openWallpaperV44(id){mergeWallpapersV44(wallpapers);const w=wallpapers.find(x=>x.id===id);if(w&&typeof openDetailModal==='function')openDetailModal(w.id)}
+async function bootFirestoreSyncV44(){await loadFirestoreWallpapersV44();rebuildAllViewsV44()}
+
+async function fakeUpload(){
+ const secretEl=document.getElementById('adminSecret');
+ if(!isAdminSaved()&&!adminUnlocked){const secret=(secretEl&&secretEl.value||'').trim();if(secret!==ADMIN_SECRET){showToast(t('wrongSecret')||'Wrong admin secret');return}adminUnlocked=true;localStorage.setItem(LS.admin,'1');refreshAdminSecretUI()}
+ const name=(document.getElementById('uploadName')?.value||'').trim()||'WallFlix Upload';
+ const cat=document.getElementById('uploadCategory')?.value||'anime';
+ const url=(document.getElementById('uploadUrl')?.value||'').trim();
+ const img=url||uploadImageData;
+ if(!img){showToast('Paste image URL or choose image');return}
+ const item=normalizeWallpaperV44({id:'wp_'+Date.now(),title:name,cat,img,views:0,likes:0,downloads:0,ratingTotal:0,ratingCount:0,featured:false,createdAt:Date.now(),localUpload:!url,urlUpload:!!url});
+ try{await saveWallpaperFirestoreV44(item);wallpapers=mergeWallpapersV44([item,...wallpapers]);const n=document.getElementById('uploadName');if(n)n.value='';const u=document.getElementById('uploadUrl');if(u)u.value='';const p=document.getElementById('uploadPreview');if(p){p.classList.add('hidden');p.src=''}uploadImageData='';rebuildAllViewsV44();setHeroWallpaperV44(item.id);try{if(typeof notifyNewWallpaper==='function')notifyNewWallpaper(item)}catch(e){}closeModal('upload-modal');showToast('Wallpaper saved to Firestore');setTimeout(()=>openWallpaperV44(item.id),350)}catch(e){console.error(e);showToast('Firestore save failed')}
+}
+function markRead(){notifications=notifications.map(n=>({...n,read:true}));document.querySelectorAll('.notif-unread').forEach(e=>e.remove());document.getElementById('notif-dot').style.display='none';renderNotifications()} function logout(){
+ if(auth)auth.signOut().catch(console.warn);
+ currentUser=null;
+ updateAuthModalUI();
+ updateCounts();
+ showToast(t('loggedOut'));
+}
+
+
+
+function updateAuthModalUI(){
+ const form=document.getElementById('loginFormBox');
+ const logoutBtn=document.getElementById('logoutBtnAuth');
+ const logged=!!(currentUser||(auth&&auth.currentUser));
+ if(form){form.classList.toggle('hidden',logged);form.classList.toggle('force-hidden',logged);form.style.display=logged?'none':'block'}
+ if(logoutBtn){logoutBtn.classList.toggle('hidden',!logged);logoutBtn.classList.toggle('force-show',logged);logoutBtn.style.display=logged?'block':'none'}
+}
+
+
+function initFirebaseAuth(){
+ if(!auth)return;
+ auth.onAuthStateChanged(user=>{
+  currentUser=user||null;
+  updateAuthModalUI();
+  let emailEl=document.getElementById('userEmail'),authTxt=document.getElementById('authMenuText');
+  let pEmail=document.getElementById('profileEmail2'),fb=document.getElementById('profileFirebaseStatus');
+  if(user){
+   if(emailEl)emailEl.textContent=user.email;
+   if(pEmail)pEmail.textContent=user.email;
+   if(authTxt)authTxt.textContent='Firebase Connected';
+   if(fb)fb.textContent='Connected';
+   loadUserCloud();
+  }else{
+   if(emailEl)emailEl.textContent='Guest user';
+   if(pEmail)pEmail.textContent='Guest';
+   if(authTxt)authTxt.textContent='Login / Register';
+   if(fb)fb.textContent='Ready';
+  }
+  updateCounts();
+ });
+ setTimeout(updateAuthModalUI,200);
+}
+async function registerUser(){
+ const email=document.getElementById('authEmail').value.trim();
+ const pass=document.getElementById('authPass').value;
+ if(!email||!pass){showToast('Email and password required');return}
+ try{
+  const cred=await auth.createUserWithEmailAndPassword(email,pass);
+  currentUser=cred.user;
+  updateAuthModalUI();
+  saveUserCloud();
+  showToast('Account created');
+ }catch(e){showToast(e.message||'Register error')}
+}
+async function loginUser(){
+ const email=document.getElementById('authEmail').value.trim();
+ const pass=document.getElementById('authPass').value;
+ if(!email||!pass){showToast('Email and password required');return}
+ try{
+  const cred=await auth.signInWithEmailAndPassword(email,pass);
+  currentUser=cred.user;
+  updateAuthModalUI();
+  loadUserCloud();
+  showToast('Logged in');
+ }catch(e){showToast(e.message||'Login error')}
+}
+async function saveUserCloud(){
+ if(!fbReady||!db||!currentUser)return;
+ try{await db.collection('users').doc(currentUser.uid).set({email:currentUser.email,favorites:favs(),downloads:downs(),likes:likes(),updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true})}catch(e){console.warn(e)}
+}
+async function loadUserCloud(){
+ if(!fbReady||!db||!currentUser)return;
+ try{let snap=await db.collection('users').doc(currentUser.uid).get();if(snap.exists){let d=snap.data();if(Array.isArray(d.favorites))localStorage.setItem(LS.fav,JSON.stringify(d.favorites));if(Array.isArray(d.downloads))localStorage.setItem(LS.down,JSON.stringify(d.downloads));if(Array.isArray(d.likes))localStorage.setItem(LS.like,JSON.stringify(d.likes));renderLists();}}catch(e){console.warn(e)}
+}
+async function loadFirebaseWallpapers(){await loadFirestoreWallpapersV44();rebuildAllViewsV44()}
+
+
+const FCM_VAPID_KEY='BItMmJqG2ifVpmZbBQcMJLPYvyjImbgE4ANdcdrrB9pRJFcrg0qMjvnWJEjHsG8q-bybR5V9SX2fepiVzH2WgUY';
+function enablePushNotifications(){}
+function setupPWA(){
+ if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('/firebase-messaging-sw.js?v=6', {scope:'/'}).catch(console.warn);
+ }
+ window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();deferredPrompt=e;
+  if(localStorage.getItem('wallflix_install_dismissed')!=='1'){
+   let b=document.getElementById('install-banner'); if(b)b.classList.add('show');
+  }
+ });
+}
+async function installApp(){if(!deferredPrompt){showToast('Use browser menu to install');return}deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;dismissInstall()}
+function dismissInstall(){localStorage.setItem('wallflix_install_dismissed','1');let b=document.getElementById('install-banner');if(b)b.classList.remove('show')}
+function refreshHeroFromWallpapers(){
+ const top=trendingWalls(3);
+ if(top.length>=3){
+  sliderData.splice(0,sliderData.length,...top.map(w=>({title:w.title,desc:(w.cat||'Premium wallpaper'),img:w.img,id:w.id})));
+  currentSliderIndex=Math.floor(Math.random()*sliderData.length);updateSlider();
+ }
+}
+function updateAdminUI(){
+ const badge=document.getElementById('profileAdminBadge'); if(badge)badge.classList.toggle('hidden',!isAdmin());
+}
+function openCommentsModal(){
+ selectedRating=0;
+ renderRatingStars();
+ wfUpdateRatingAverage();
+ loadComments(currentDetailId);
+ openModal('comments-modal');
+}
+function setRating(n){
+ selectedRating=n;
+ document.querySelectorAll('#ratingStars button').forEach((btn,index)=>{
+  btn.classList.toggle('active',index<n);
+  btn.innerHTML=index<n?'<i class="fas fa-star"></i>':'<i class="far fa-star"></i>';
+ });
+}
+function renderRatingStars(){setRating(selectedRating||0)}
+async function submitComment(){
+ const text=(document.getElementById('commentText').value||'').trim();
+ if(!text&&!selectedRating){showToast('Write comment or rating');return}
+ const email=(currentUser&&currentUser.email)?currentUser.email:'Guest';
+ const uid=(currentUser&&currentUser.uid)?currentUser.uid:'guest';
+ const item={wallpaperId:currentDetailId,text:text,rating:selectedRating,email:email,uid:uid,createdAt:Date.now()};
+ const w=getWallpaper(currentDetailId);
+ if(w&&selectedRating){
+  w.ratingTotal=Number(w.ratingTotal||0)+selectedRating;
+  w.ratingCount=Number(w.ratingCount||0)+1;
+ }
+ currentComments.unshift(item);
+ document.getElementById('commentText').value='';
+ selectedRating=0;
+ renderRatingStars();
+ renderComments();
+ wfUpdateRatingAverage();
+ wfRenderTopRated();
+ buildWalls();
+ try{
+  if(fbReady&&db){
+   await db.collection('wallpapers').doc(currentDetailId).collection('comments').add({...item,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
+   if(w&&item.rating){
+    await db.collection('wallpapers').doc(currentDetailId).set({
+     ratingTotal:w.ratingTotal||0,
+     ratingCount:w.ratingCount||0,
+     avgRating:wfAvgRating(w),
+     updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+    },{merge:true});
+   }
+  }
+ }catch(e){console.warn(e)}
+ showToast('Comment added');
+}
+function loadComments(){
+ const box=document.getElementById('commentsList');
+ if(!box)return;
+ const key='comments_'+currentDetailId;
+ const list=JSON.parse(localStorage.getItem(key)||'[]');
+ if(!list.length){box.innerHTML='<div class="text-xs text-muted text-center p-4">No comments yet</div>';return}
+ box.innerHTML=list.map(c=>`<div class="comment-item">
+  <div class="flex justify-between gap-2"><b class="text-xs text-main">${c.by||'Guest'}</b><span class="text-[9px] text-muted">${timeAgo(c.createdAt)}</span></div>
+  <p class="text-xs text-muted mt-1">${c.text||''}</p>
+  <div class="comment-actions"><button onclick="replyComment('${c.id}')">Reply</button><button onclick="reportComment('${c.id}')">Report</button>${isAdmin()?`<button onclick="deleteCommentAdmin('${c.id}')" class="text-red-400">Delete</button>`:''}</div>
+  ${(c.replies||[]).map(r=>`<div class="reply-box"><b class="text-[10px] text-main">${r.by||'Admin'}</b><p class="text-[10px] text-muted">${r.text}</p></div>`).join('')}
+ </div>`).join('');
+}
+function renderComments(){
+ const box=document.getElementById('commentsList');if(!box)return;
+ box.innerHTML=currentComments.map(c=>`<div class="comment-item"><div class="flex justify-between items-center"><b class="text-xs text-main">${c.email||'Guest'}</b><span class="text-[10px] text-amber-400">${'★'.repeat(Number(c.rating||0))}</span></div><p class="text-xs text-muted mt-1">${c.text||''}</p></div>`).join('')||'<div class="text-center text-muted text-xs p-5">No comments yet</div>';
+}
+
+function showToast(msg){let el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.classList.remove('show'),1800)}
+
+/* V23 FINAL Notifications Stable */
+var NOTIF_KEY = 'wallflix_notifications_v23';
+
+function getNotifications(){
+  try{return JSON.parse(localStorage.getItem(NOTIF_KEY) || '[]')}catch(e){return []}
+}
+
+function saveNotifications(list){
+  localStorage.setItem(NOTIF_KEY, JSON.stringify((list || []).slice(0,20)));
+  renderNotifications();
+  updateNotificationDot();
+}
+
+function timeAgo(ts){
+  const sec=Math.max(1,Math.floor((Date.now()-Number(ts||Date.now()))/1000));
+  if(sec<60)return sec+'s ago';
+  const min=Math.floor(sec/60); if(min<60)return min+'m ago';
+  const h=Math.floor(min/60); if(h<24)return h+'h ago';
+  return Math.floor(h/24)+'d ago';
+}
+
+function addNotification(title,body,type='wallpaper'){
+  const list=getNotifications();
+  list.unshift({id:'n'+Date.now(),title,body,type,read:false,createdAt:Date.now()});
+  saveNotifications(list);
+}
+
+function updateNotificationDot(){
+  const unread=getNotifications().filter(n=>!n.read).length;
+  const dot=document.getElementById('notif-dot');
+  if(dot)dot.classList.toggle('hidden', unread===0);
+}
+
+function renderNotifications(){
+  const box=document.getElementById('notificationsList');
+  if(!box)return;
+  const list=getNotifications();
+  if(!list.length){
+    box.innerHTML='<div class="notif-empty"><i class="fas fa-bell text-purple-400 text-xl mb-2"></i><br>No notifications yet</div>';
+    updateNotificationDot();
+    return;
+  }
+  box.innerHTML=list.map(n=>`<div class="notif-card">
+    <div class="notif-icon"><i class="fas ${n.type==='wallpaper'?'fa-image':'fa-bell'}"></i></div>
+    <div class="flex-1">
+      <div class="notif-title">${n.title||'WallFlix'}</div>
+      <div class="notif-text">${n.body||''}</div>
+      <div class="notif-time">${timeAgo(n.createdAt)}</div>
+    </div>
+    ${n.read?'':'<span class="w-2 h-2 rounded-full bg-purple-neon mt-2"></span>'}
+  </div>`).join('');
+  updateNotificationDot();
+}
+
+function markRead(){
+  const list=getNotifications().map(n=>Object.assign({},n,{read:true}));
+  localStorage.setItem(NOTIF_KEY, JSON.stringify(list.slice(0,20)));
+  const dot=document.getElementById('notif-dot');
+  if(dot)dot.classList.add('hidden');
+  renderNotifications();
+  showToast('All notifications marked as read');
+}
+window.markAllAsRead = markRead;
+
+function openNotifications(){
+  renderNotifications();
+  updateNotificationDot();
+  openModal('notifications-modal');
+}
+
+function notifyNewWallpaper(item){
+  if(!item)return;
+  const catName=(cats.find(c=>c[0]===item.cat)||[])[3]||item.cat||'Wallpaper';
+  addNotification('🆕 New wallpaper added',`Wallpaper: ${item.title||'New wallpaper'} • Category: ${catName}`,'wallpaper');
+}
+
+function wallflixBootFix(){
+  try{
+    if(typeof updateAuthModalUI==='function')updateAuthModalUI();
+    renderNotifications();
+    updateNotificationDot();
+    if(typeof initSlider==='function')initSlider();
+    if(typeof fixDailyWallpaper==='function')fixDailyWallpaper();
+    if(typeof startDailyTimer==='function')startDailyTimer();
+    if(typeof forceHeroReady==='function')forceHeroReady();
+    setTimeout(()=>{try{
+      if(typeof forceHeroReady==='function')forceHeroReady();
+      if(typeof updateDailyTimer==='function')updateDailyTimer();
+      if(typeof updateAuthModalUI==='function')updateAuthModalUI();
+      renderNotifications();
+      updateNotificationDot();
+    }catch(e){}},700);
+  }catch(e){console.warn('boot fix',e)}
+}
+window.addEventListener('load',()=>{wallflixBootFix();});
+
+
+/* V24 Premium Search + Trending + Push */
+let premiumSearchCat='all';
+
+function premiumScore(w){
+ const avg=(Number(w.ratingCount||0)?Number(w.ratingTotal||0)/Number(w.ratingCount||1):0);
+ return Number(w.likes||0)*5 + Number(w.downloads||0)*4 + Number(w.views||0)*1 + avg*45 + (w.featured?500:0);
+}
+function sortTrending(list=wallpapers){
+ return [...list].sort((a,b)=>premiumScore(b)-premiumScore(a));
+}
+function miniCard(w,label=''){
+ return `<div class="vf-card" onclick="openDetailModal('${w.id}')">
+  <img src="${w.img}" alt="${w.title}">
+  <div class="shade"></div>
+  ${w.featured?'<div class="absolute top-2 left-2 featured-badge"><i class="fas fa-star"></i>Featured</div>':''}
+  <div class="info"><h4>${w.title}</h4><p>${label||w.cat}</p></div>
+ </div>`;
+}
+function renderSearchChips(){
+ const box=document.getElementById('searchChips');
+ if(!box)return;
+ const picked=['all','anime','cars','nature','gaming','amoled','morocco','space','abstract','neon'];
+ box.innerHTML=picked.map(id=>{
+  const c=id==='all'?['all','fa-layer-group','text-purple-400','All']:cats.find(x=>x[0]===id);
+  if(!c)return '';
+  return `<button onclick="setSearchCat('${id}')" class="search-chip ${premiumSearchCat===id?'active':''}">
+    <i class="fas ${c[1]}"></i>${c[3]}
+  </button>`;
+ }).join('');
+}
+function setSearchCat(cat){
+ premiumSearchCat=cat||'all';
+ renderSearchChips();
+ searchWallpapers();
+}
+function clearPremiumSearch(){
+ premiumSearchCat='all';
+ const inp=document.getElementById('searchInput');
+ if(inp)inp.value='';
+ renderSearchChips();
+ searchWallpapers();
+}
+function premiumEmptyState(){
+ return `<div class="empty-premium">
+  <i class="fas fa-magnifying-glass text-purple-400 text-2xl mb-2"></i><br>
+  No wallpapers found<br><span class="text-[10px] text-muted">Try another keyword or category</span>
+ </div>`;
+}
+function searchWallpapers(){
+ const input=document.getElementById('searchInput');
+ const q=(input&&input.value||'').trim().toLowerCase();
+ const label=document.getElementById('searchResultLabel');
+ const labelText=document.getElementById('searchResultText');
+ let list=wallpapers.filter(w=>{
+  const title=(w.title||'').toLowerCase();
+  const cat=(w.cat||'').toLowerCase();
+  const catName=((cats.find(c=>c[0]===w.cat)||[])[3]||'').toLowerCase();
+  const textOk=!q || title.includes(q) || cat.includes(q) || catName.includes(q);
+  const catOk=premiumSearchCat==='all' || w.cat===premiumSearchCat;
+  return textOk&&catOk;
+ });
+ list=sortTrending(list);
+ const grid=document.getElementById('wallGrid');
+ if(grid)grid.innerHTML=list.map(wallCard).join('') || premiumEmptyState();
+ if(label){
+  const active=q||premiumSearchCat!=='all';
+  label.classList.toggle('show',!!active);
+  if(labelText)labelText.textContent=`${list.length} result${list.length===1?'':'s'} found`;
+ }
+ if(q||premiumSearchCat!=='all')switchTab('explore');
+}
+function renderNewWallpapers(){
+ const box=document.getElementById('newWallpapersList');
+ if(!box)return;
+ const list=[...wallpapers].sort((a,b)=>Number(b.createdAt||0)-Number(a.createdAt||0)).slice(0,8);
+ box.innerHTML=list.map(w=>miniCard(w,'New')).join('')||'<div class="text-xs text-muted p-4 card-bg rounded-2xl w-full text-center">No new wallpapers</div>';
+}
+function renderTrendingPremium(){
+ const t=document.getElementById('trendingList');
+ if(t)t.innerHTML=sortTrending(wallpapers).slice(0,8).map((w,i)=>miniCard(w,`#${i+1} Trending`)).join('');
+ const liked=document.getElementById('mostLikedList');
+ if(liked)liked.innerHTML=[...wallpapers].sort((a,b)=>Number(b.likes||0)-Number(a.likes||0)).slice(0,8).map(w=>miniCard(w,`${fmt(w.likes||0)} likes`)).join('');
+ const down=document.getElementById('mostDownloadedList');
+ if(down)down.innerHTML=[...wallpapers].sort((a,b)=>Number(b.downloads||0)-Number(a.downloads||0)).slice(0,8).map(w=>miniCard(w,`${fmt(w.downloads||0)} downloads`)).join('');
+ renderNewWallpapers();
+}
+async function premiumBroadcastNotification(title,body){
+ addNotification(title,body,'bell');
+ try{
+  if(fbReady&&db){
+   await db.collection('notifications').add({title,body,createdAt:firebase.firestore.FieldValue.serverTimestamp(),type:'admin'});
+  }
+ }catch(e){console.warn(e)}
+ renderNotifications();updateNotificationDot();
+}
+function adminSendNotification(){
+ if(!requireAdmin())return;
+ const title=(document.getElementById('adminNotifTitle').value||'WallFlix update').trim();
+ const body=(document.getElementById('adminNotifDesc').value||'New premium wallpaper update').trim();
+ premiumBroadcastNotification('🔔 '+title,body);
+ document.getElementById('adminNotifTitle').value='';
+ document.getElementById('adminNotifDesc').value='';
+ showToast('Notification sent');
+}
+async function enablePushNotifications(){
+ try{
+  if('serviceWorker' in navigator){
+   try{await navigator.serviceWorker.register('/firebase-messaging-sw.js',{scope:'/'});await navigator.serviceWorker.ready}catch(e){
+    try{await navigator.serviceWorker.register('/service-worker.js',{scope:'/'});await navigator.serviceWorker.ready}catch(err){}
+   }
+  }
+  let permission='default';
+  if('Notification' in window)permission=await Notification.requestPermission();
+  if(permission==='granted'){
+   await premiumBroadcastNotification('🔔 Push notifications enabled','You will see updates when a new wallpaper is added.');
+   showToast('Push enabled');
+  }else{
+   await premiumBroadcastNotification('🔔 In-app notifications enabled','You will see notifications inside WallFlix.');
+   showToast('In-app notifications enabled');
+  }
+ }catch(e){
+  await premiumBroadcastNotification('🔔 In-app notifications enabled','WallFlix notifications are active inside the app.');
+  showToast('In-app notifications enabled');
+ }
+}
+function profileAchievements(){
+ const likes=wallpapers.reduce((s,w)=>s+Number(w.likes||0),0);
+ const down=wallpapers.reduce((s,w)=>s+Number(w.downloads||0),0);
+ const adminBadge=document.getElementById('profileAdminBadge');
+ if(adminBadge&&isAdmin())adminBadge.classList.remove('hidden');
+ const likesEl=document.getElementById('profileTotalLikes');
+ if(likesEl)likesEl.textContent=fmt(likes);
+}
+
+
+/* V26 safe restored features */
+function downloadQuality(q){
+ const w=getWallpaper(currentDetailId); 
+ if(!w)return;
+ addNotification('⬇ Download '+q,`${w.title} downloaded in ${q} quality`,'wallpaper');
+ downloadWallpaper(currentDetailId);
+ showToast('Downloading '+q);
+}
+function reportComment(id){
+ addNotification('⚠️ Comment reported','Admin will review this comment','bell');
+ showToast('Comment reported');
+}
+function deleteCommentAdmin(id){
+ if(!requireAdmin())return;
+ const key='comments_'+currentDetailId;
+ let list=JSON.parse(localStorage.getItem(key)||'[]').filter(c=>c.id!==id);
+ localStorage.setItem(key,JSON.stringify(list));
+ loadComments();
+ showToast('Comment deleted');
+}
+function replyComment(id){
+ const txt=prompt('Write reply');
+ if(!txt)return;
+ const key='comments_'+currentDetailId;
+ let list=JSON.parse(localStorage.getItem(key)||'[]');
+ const c=list.find(x=>x.id===id);
+ if(c){c.replies=c.replies||[];c.replies.push({text:txt,by:currentUser?.email||'Guest',createdAt:Date.now()})}
+ localStorage.setItem(key,JSON.stringify(list));
+ loadComments();
+}
+
+
+/* V28 Smart Premium */
+let premiumColorFilter='all';
+const COLOR_KEY='wallflix_color_filter';
+const INSTALL_KEY='wallflix_install_seen_v28';
+
+function getWallpaperColorTag(w){
+ const t=((w.title||'')+' '+(w.cat||'')).toLowerCase();
+ if(t.includes('amoled')||t.includes('dark')||t.includes('black')||t.includes('night'))return 'black';
+ if(t.includes('red')||t.includes('morocco')||t.includes('car'))return 'red';
+ if(t.includes('blue')||t.includes('space')||t.includes('gaming'))return 'blue';
+ if(t.includes('nature')||t.includes('green')||t.includes('forest'))return 'green';
+ if(t.includes('purple')||t.includes('neon')||t.includes('anime'))return 'purple';
+ return 'all';
+}
+function renderColorFilters(){
+ const row=document.getElementById('colorFilterRow'); if(!row)return;
+ const colors=[['all','linear-gradient(135deg,#a855f7,#f59e0b)'],['black','#050505'],['red','#ef4444'],['blue','#3b82f6'],['green','#22c55e'],['purple','#a855f7']];
+ row.innerHTML=colors.map(c=>`<button title="${c[0]}" onclick="setColorFilter('${c[0]}')" class="color-dot-btn ${premiumColorFilter===c[0]?'active':''}" style="background:${c[1]}"></button>`).join('');
+}
+function toggleColorFilters(){
+ const row=document.getElementById('colorFilterRow');
+ if(row)row.classList.toggle('hidden');
+ renderColorFilters();
+}
+function setColorFilter(color){
+ premiumColorFilter=color||'all';
+ localStorage.setItem(COLOR_KEY,premiumColorFilter);
+ renderColorFilters();
+ searchWallpapers();
+}
+function smartSuggestions(q){
+ const base=['Anime','Anime Dark','Naruto','One Piece','Cars','BMW','Ferrari','Nature','AMOLED','Black','Space','Gaming','Morocco','Neon','4K'];
+ q=(q||'').toLowerCase();
+ return base.filter(x=>!q||x.toLowerCase().includes(q)).slice(0,6);
+}
+function renderSearchSuggestions(){
+ const box=document.getElementById('searchSuggestions');
+ const input=document.getElementById('searchInput');
+ if(!box||!input)return;
+ const q=input.value.trim();
+ if(!q){box.classList.remove('show');return}
+ const items=smartSuggestions(q);
+ box.innerHTML=items.map(s=>`<button class="suggestion-item" onclick="applySuggestion('${s.replace(/'/g,"")}')"><i class="fas fa-magnifying-glass text-purple-400"></i>${s}</button>`).join('');
+ box.classList.toggle('show',items.length>0);
+}
+function applySuggestion(s){
+ const input=document.getElementById('searchInput');
+ if(input)input.value=s;
+ const box=document.getElementById('searchSuggestions'); if(box)box.classList.remove('show');
+ searchWallpapers();
+}
+const __oldSearchWallpapersV28=typeof searchWallpapers==='function'?searchWallpapers:null;
+function searchWallpapers(){
+ const input=document.getElementById('searchInput');
+ const q=(input&&input.value||'').trim().toLowerCase();
+ renderSearchSuggestions();
+ const label=document.getElementById('searchResultLabel');
+ const labelText=document.getElementById('searchResultText');
+ let list=wallpapers.filter(w=>{
+  const title=(w.title||'').toLowerCase();
+  const cat=(w.cat||'').toLowerCase();
+  const catName=((cats.find(c=>c[0]===w.cat)||[])[3]||'').toLowerCase();
+  const textOk=!q || title.includes(q) || cat.includes(q) || catName.includes(q);
+  const catOk=(typeof premiumSearchCat==='undefined'||premiumSearchCat==='all') || w.cat===premiumSearchCat;
+  const colorOk=premiumColorFilter==='all'||getWallpaperColorTag(w)===premiumColorFilter;
+  return textOk&&catOk&&colorOk;
+ });
+ if(typeof sortTrending==='function')list=sortTrending(list);
+ const grid=document.getElementById('wallGrid');
+ if(grid)grid.innerHTML=list.map(wallCard).join('') || (typeof premiumEmptyState==='function'?premiumEmptyState():'');
+ if(label){
+  const active=q||premiumColorFilter!=='all'||(typeof premiumSearchCat!=='undefined'&&premiumSearchCat!=='all');
+  label.classList.toggle('show',!!active);
+  if(labelText)labelText.textContent=`${list.length} result${list.length===1?'':'s'} found`;
+ }
+ if(q||premiumColorFilter!=='all'||(typeof premiumSearchCat!=='undefined'&&premiumSearchCat!=='all'))switchTab('explore');
+}
+function safeImageError(img){
+ if(!img)return;
+ img.onerror=null;
+ img.src='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900"><rect width="100%" height="100%" fill="#111"/><text x="50%" y="48%" text-anchor="middle" fill="#a855f7" font-size="40" font-family="Arial" font-weight="700">WallFlix</text><text x="50%" y="54%" text-anchor="middle" fill="#a1a1aa" font-size="18" font-family="Arial">Premium Wallpaper</text></svg>`);
+}
+function applyLazyAndFallbacks(){
+ document.querySelectorAll('img').forEach(img=>{
+  img.loading='lazy';
+  if(!img.dataset.fallbackReady){
+   img.dataset.fallbackReady='1';
+   img.addEventListener('error',()=>safeImageError(img));
+  }
+ });
+}
+function getWallpaperOfWeek(){
+ if(!wallpapers.length)return null;
+ const week=Math.floor(Date.now()/(7*24*60*60*1000));
+ return wallpapers[week%wallpapers.length];
+}
+function markWallpaperOfWeek(){
+ const w=getWallpaperOfWeek();
+ document.querySelectorAll('.week-badge').forEach(x=>x.remove());
+ if(!w)return;
+ document.querySelectorAll(`[onclick*="${w.id}"]`).forEach(card=>{
+  if(card.querySelector&&card.querySelector('img')&&!card.querySelector('.week-badge')){
+   const b=document.createElement('div');
+   b.className='week-badge';
+   b.innerHTML='<i class="fas fa-trophy"></i> Week';
+   card.appendChild(b);
+  }
+ });
+}
+function likeAnimation(){
+ const h=document.createElement('div');
+ h.className='heart-pop';
+ h.innerHTML='<i class="fas fa-heart"></i>';
+ h.style.left='50%';h.style.top='52%';
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),800);
+}
+const __oldToggleFavoriteV28=typeof toggleFavorite==='function'?toggleFavorite:null;
+if(__oldToggleFavoriteV28){
+ toggleFavorite=function(id){
+  __oldToggleFavoriteV28(id);
+  likeAnimation();
+ };
+}
+const __oldDownloadWallpaperV28=typeof downloadWallpaper==='function'?downloadWallpaper:null;
+if(__oldDownloadWallpaperV28){
+ downloadWallpaper=function(id){
+  __oldDownloadWallpaperV28(id);
+  const el=document.getElementById('detail-downloads')||document.getElementById('adminDownCount');
+  if(el){el.classList.add('count-bump');setTimeout(()=>el.classList.remove('count-bump'),450)}
+  const key='wallflix_download_today_'+new Date().toDateString();
+  localStorage.setItem(key,Number(localStorage.getItem(key)||0)+1);
+  updateAdminAnalyticsV28();
+ };
+}
+function maybeShowInstallPremium(){
+ const banner=document.getElementById('install-banner');
+ if(!banner||localStorage.getItem(INSTALL_KEY))return;
+ setTimeout(()=>{banner.classList.add('show','premium-v28');localStorage.setItem(INSTALL_KEY,'1')},1800);
+}
+function updateAdminAnalyticsV28(){
+ const topW=[...wallpapers].sort((a,b)=>(Number(b.views||0)+Number(b.likes||0)*5+Number(b.downloads||0)*3)-(Number(a.views||0)+Number(a.likes||0)*5+Number(a.downloads||0)*3))[0];
+ const counts={}; wallpapers.forEach(w=>counts[w.cat]=(counts[w.cat]||0)+1);
+ const topCat=Object.entries(counts).sort((a,b)=>b[1]-a[1])[0];
+ const ratings=wallpapers.filter(w=>Number(w.ratingCount||0)>0);
+ const avg=ratings.length?(ratings.reduce((s,w)=>s+(Number(w.ratingTotal||0)/Number(w.ratingCount||1)),0)/ratings.length).toFixed(1):'0.0';
+ const today=localStorage.getItem('wallflix_download_today_'+new Date().toDateString())||0;
+ const a=document.getElementById('adminTopWallpaperV28'); if(a)a.textContent=topW?topW.title.slice(0,18):'-';
+ const c=document.getElementById('adminTopCategoryV28'); if(c)c.textContent=topCat?((cats.find(x=>x[0]===topCat[0])||[])[3]||topCat[0]):'-';
+ const r=document.getElementById('adminAvgRatingV28'); if(r)r.textContent=avg;
+ const d=document.getElementById('adminTodayDownV28'); if(d)d.textContent=today;
+}
+function bootV28(){
+ premiumColorFilter=localStorage.getItem(COLOR_KEY)||'all';
+ renderColorFilters();
+ applyLazyAndFallbacks();
+ markWallpaperOfWeek();
+ maybeShowInstallPremium();
+ updateAdminAnalyticsV28();
+ setTimeout(()=>{applyLazyAndFallbacks();markWallpaperOfWeek();updateAdminAnalyticsV28()},900);
+}
+window.addEventListener('load',bootV28);
+document.addEventListener('input',e=>{if(e.target&&e.target.id==='searchInput')renderSearchSuggestions()});
+document.addEventListener('click',e=>{const box=document.getElementById('searchSuggestions');if(box&&!e.target.closest('#searchSuggestions')&&e.target.id!=='searchInput')box.classList.remove('show')});
+
+
+/* V38 late upload restore */
+window.addEventListener('load',()=>{
+ mergeUrlUploadsV38(wallpapers);
+ setTimeout(()=>{mergeUrlUploadsV38(wallpapers);buildWalls(wallpapers);},400);
+ setTimeout(()=>{mergeUrlUploadsV38(wallpapers);buildWalls(wallpapers);},1800);
+});
+document.addEventListener('visibilitychange',()=>{
+ if(!document.hidden){mergeUrlUploadsV38(wallpapers);buildWalls(wallpapers);}
+});
+
+
+/* V39 Admin late boot */
+window.addEventListener('load',()=>{
+ try{mergeAdminSavedWallpapersV39();renderAdminDashboard();}catch(e){}
+ setTimeout(()=>{try{mergeAdminSavedWallpapersV39();renderAdminDashboard();}catch(e){}},1000);
+});
+
+
+/* V42 Auto upload final boot */
+const __openDetailV42=typeof openDetailModal==='function'?openDetailModal:null;
+if(__openDetailV42){openDetailModal=function(id){mergePersistedWallpapersV42(wallpapers);if(id==='slider'&&wallflixLastUploadedIdV42)return __openDetailV42(wallflixLastUploadedIdV42);return __openDetailV42(id)}}
+const __buildWallsV42=typeof buildWalls==='function'?buildWalls:null;
+if(__buildWallsV42){buildWalls=function(list){mergePersistedWallpapersV42(Array.isArray(list)?list:wallpapers);return __buildWallsV42(wallpapers)}}
+const __renderListsV42=typeof renderLists==='function'?renderLists:null;
+if(__renderListsV42){renderLists=function(){mergePersistedWallpapersV42(wallpapers);return __renderListsV42()}}
+window.addEventListener('load',()=>{mergePersistedWallpapersV42(wallpapers);setTimeout(()=>refreshAllWallpaperViewsV42(),400);setTimeout(()=>refreshAllWallpaperViewsV42(),1600)});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshAllWallpaperViewsV42()});
+
+
+/* V44 boot wrappers */
+const __openDetailV44=typeof openDetailModal==='function'?openDetailModal:null;if(__openDetailV44){openDetailModal=function(id){mergeWallpapersV44(wallpapers);if(id==='slider'&&wallflixLastOpenedIdV44)return __openDetailV44(wallflixLastOpenedIdV44);return __openDetailV44(id)}}
+const __buildWallsV44=typeof buildWalls==='function'?buildWalls:null;if(__buildWallsV44){buildWalls=function(list){mergeWallpapersV44(Array.isArray(list)?list:wallpapers);return __buildWallsV44(wallpapers)}}
+const __renderListsV44=typeof renderLists==='function'?renderLists:null;if(__renderListsV44){renderLists=function(){mergeWallpapersV44(wallpapers);return __renderListsV44()}}
+window.addEventListener('load',()=>{setTimeout(bootFirestoreSyncV44,450);setTimeout(bootFirestoreSyncV44,1800)});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)bootFirestoreSyncV44()});
+
+
+/* V45 Video Wallpapers */
+let uploadVideoDataV45='';
+let uploadVideoFileNameV45='';
+
+function isVideoWallpaperV45(w){
+  return !!(w && (w.type==='video' || w.mediaType==='video' || /\.(mp4|webm|ogg)(\?|$)/i.test(w.img||'')));
+}
+function mediaThumbV45(w,cls=''){
+  if(isVideoWallpaperV45(w)){
+    return `<video src="${w.img}" class="${cls}" muted loop playsinline preload="metadata"></video><span class="video-badge-v45"><i class="fas fa-play"></i></span>`;
+  }
+  return `<img src="${w.img}" class="${cls}" loading="lazy">`;
+}
+function previewVideoUploadV45(event){
+  const file=event.target.files && event.target.files[0];
+  if(!file)return;
+  uploadVideoFileNameV45=file.name||'video-wallpaper.mp4';
+  const reader=new FileReader();
+  reader.onload=e=>{
+    uploadVideoDataV45=e.target.result;
+    const preview=document.getElementById('uploadVideoPreview');
+    const imagePreview=document.getElementById('uploadPreview');
+    if(imagePreview){imagePreview.classList.add('hidden');imagePreview.src=''}
+    if(preview){preview.src=uploadVideoDataV45;preview.style.display='block';preview.play().catch(()=>{});}
+    uploadImageData='';
+  };
+  reader.readAsDataURL(file);
+}
+async function saveVideoFirestoreV45(item){
+  try{
+    if(typeof saveWallpaperFirestoreV44==='function'){await saveWallpaperFirestoreV44(item);return true}
+    if(fbReady&&db){await db.collection('wallpapers').doc(item.id).set({...item,updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});return true}
+  }catch(e){console.warn('Video Firestore save failed:',e)}
+  try{
+    if(typeof persistWallpaperV42==='function')persistWallpaperV42(item);
+    if(typeof backupWallpaperV44==='function')backupWallpaperV44(item);
+  }catch(e){}
+  return false;
+}
+async function fakeUploadVideoV45(){
+ const secretEl=document.getElementById('adminSecret');
+ if(!isAdminSaved()&&!adminUnlocked){
+  const secret=(secretEl&&secretEl.value||'').trim();
+  if(secret!==ADMIN_SECRET){showToast(t('wrongSecret')||'Wrong admin secret');return}
+  adminUnlocked=true;localStorage.setItem(LS.admin,'1');refreshAdminSecretUI();
+ }
+ const name=(document.getElementById('uploadName')?.value||'').trim()||'WallFlix Video';
+ const cat=document.getElementById('uploadCategory')?.value||'anime';
+ const url=(document.getElementById('uploadUrl')?.value||'').trim();
+ const img=url||uploadVideoDataV45;
+ if(!img){showToast('Choose video or paste video URL');return}
+ const item={id:'vid_'+Date.now(),title:name,cat,img,type:'video',mediaType:'video',views:0,likes:0,downloads:0,ratingTotal:0,ratingCount:0,featured:false,createdAt:Date.now(),localUpload:!url,urlUpload:!!url};
+ await saveVideoFirestoreV45(item);
+ wallpapers=[item,...(Array.isArray(wallpapers)?wallpapers:[])];
+ try{if(typeof mergeWallpapersV44==='function')mergeWallpapersV44(wallpapers)}catch(e){}
+ try{if(typeof mergePersistedWallpapersV42==='function')mergePersistedWallpapersV42(wallpapers)}catch(e){}
+ const n=document.getElementById('uploadName');if(n)n.value='';
+ const u=document.getElementById('uploadUrl');if(u)u.value='';
+ const vp=document.getElementById('uploadVideoPreview');if(vp){vp.pause();vp.src='';vp.style.display='none'}
+ uploadVideoDataV45='';uploadVideoFileNameV45='';
+ try{if(typeof rebuildAllViewsV44==='function')rebuildAllViewsV44();else if(typeof refreshAllWallpaperViewsV42==='function')refreshAllWallpaperViewsV42();else buildWalls(wallpapers)}catch(e){}
+ try{if(typeof setHeroWallpaperV44==='function')setHeroWallpaperV44(item.id);else if(typeof setHeroToUploadedV42==='function')setHeroToUploadedV42(item.id)}catch(e){}
+ closeModal('upload-modal');
+ showToast('Video wallpaper added');
+ setTimeout(()=>{try{openDetailModal(item.id)}catch(e){}},350);
+}
+
+const __v45WallCard=typeof wallCard==='function'?wallCard:null;
+if(__v45WallCard){
+ wallCard=function(w){
+  if(!isVideoWallpaperV45(w)) return __v45WallCard(w);
+  return `<div class="wall-card relative rounded-2xl overflow-hidden cursor-pointer bg-black border border-main" onclick="openDetailModal('${w.id}')">
+    <div class="aspect-[3/4] relative">${mediaThumbV45(w,'w-full h-full object-cover')}</div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent"></div>
+    <div class="absolute bottom-3 left-3 right-3">
+      <h4 class="text-xs font-bold text-white truncate">${w.title||'Video Wallpaper'}</h4>
+      <p class="text-[10px] text-zinc-300">${w.cat||'video'} • Video</p>
+    </div>
+  </div>`;
+ };
+}
+const __v45OpenDetail=typeof openDetailModal==='function'?openDetailModal:null;
+if(__v45OpenDetail){
+ openDetailModal=function(id){
+  const w=(typeof getWallpaper==='function'?getWallpaper(id):null)||(Array.isArray(wallpapers)?wallpapers.find(x=>x.id===id):null);
+  if(!w || !isVideoWallpaperV45(w)) return __v45OpenDetail(id);
+  currentDetailId=w.id;
+  const modal=document.getElementById('detail-modal');
+  const img=document.getElementById('detail-img-view');
+  if(img){
+    const video=document.createElement('video');
+    video.id='detail-img-view';
+    video.src=w.img;
+    video.className=img.className;
+    video.controls=true;video.autoplay=true;video.loop=true;video.muted=true;video.playsInline=true;
+    img.replaceWith(video);
+  }else{
+    const oldVid=document.querySelector('#detail-modal video#detail-img-view');
+    if(oldVid){oldVid.src=w.img;oldVid.play().catch(()=>{});}
+  }
+  const title=document.getElementById('detail-title');if(title)title.textContent=w.title||'Video Wallpaper';
+  const badge=document.getElementById('detail-featured-badge');if(badge)badge.classList.toggle('hidden',!w.featured);
+  if(modal){modal.classList.remove('hidden');setTimeout(()=>modal.classList.add('modal-open'),20);}
+  try{incrementView(w.id)}catch(e){}
+ };
+}
+const __v45SetHero44=typeof setHeroWallpaperV44==='function'?setHeroWallpaperV44:null;
+if(__v45SetHero44){
+ setHeroWallpaperV44=function(id){
+  const w=wallpapers.find(x=>x.id===id);
+  if(!w || !isVideoWallpaperV45(w)) return __v45SetHero44(id);
+  const bg=document.getElementById('slider-bg'),title=document.getElementById('slider-title'),desc=document.getElementById('slider-desc');
+  if(bg){bg.style.backgroundImage='none';bg.innerHTML=`<video src="${w.img}" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"></video>`}
+  if(title)title.textContent=w.title||'Video Wallpaper';
+  if(desc)desc.textContent=(w.cat||'video')+' • Video';
+  wallflixLastOpenedIdV44=id;
+ };
+}
+
+
+/* V45 image/video preview sync */
+const __previewUploadFileV45=typeof previewUploadFile==='function'?previewUploadFile:null;
+if(__previewUploadFileV45){
+ previewUploadFile=function(event){
+  const vp=document.getElementById('uploadVideoPreview');
+  if(vp){vp.pause();vp.src='';vp.style.display='none'}
+  uploadVideoDataV45='';
+  return __previewUploadFileV45(event);
+ };
+}
+
+
+/* V46 Mobile Video UI Fixed */
+function ensureDetailImageElementV46(){
+  const wrap=document.querySelector('#detail-modal .detail-image-wrap');
+  let media=document.getElementById('detail-img-view');
+  if(media && media.tagName.toLowerCase()==='video'){
+    const img=document.createElement('img');
+    img.id='detail-img-view';
+    img.className=media.className;
+    img.src='';
+    media.replaceWith(img);
+    return img;
+  }
+  return media;
+}
+const __openDetailV46=typeof openDetailModal==='function'?openDetailModal:null;
+if(__openDetailV46){
+  openDetailModal=function(id){
+    const w=(typeof getWallpaper==='function'?getWallpaper(id):null)||(Array.isArray(wallpapers)?wallpapers.find(x=>x.id===id):null);
+    const isVid=typeof isVideoWallpaperV45==='function' && isVideoWallpaperV45(w);
+    if(!isVid) ensureDetailImageElementV46();
+    return __openDetailV46(id);
+  };
+}
+
+
+/* V47 Video Upload Working */
+let v47VideoBlobUrl='';
+let v47SelectedVideoFile=null;
+const V47_VIDEO_DB='wallflix_video_wallpapers_v47';
+const V47_VIDEO_STORE='videos';
+
+function openVideoDBV47(){
+ return new Promise((resolve,reject)=>{
+  const req=indexedDB.open(V47_VIDEO_DB,1);
+  req.onupgradeneeded=()=>{const db=req.result;if(!db.objectStoreNames.contains(V47_VIDEO_STORE))db.createObjectStore(V47_VIDEO_STORE,{keyPath:'id'});};
+  req.onsuccess=()=>resolve(req.result);
+  req.onerror=()=>reject(req.error);
+ });
+}
+async function saveVideoV47(item,file){
+ try{
+  const db=await openVideoDBV47();
+  return await new Promise((resolve,reject)=>{
+   const tx=db.transaction(V47_VIDEO_STORE,'readwrite');
+   tx.objectStore(V47_VIDEO_STORE).put({...item,file:file||null});
+   tx.oncomplete=()=>resolve(true);
+   tx.onerror=()=>reject(tx.error);
+  });
+ }catch(e){console.warn('V47 indexedDB save failed',e);return false}
+}
+async function getVideosV47(){
+ try{
+  const db=await openVideoDBV47();
+  return await new Promise((resolve,reject)=>{
+   const tx=db.transaction(V47_VIDEO_STORE,'readonly');
+   const req=tx.objectStore(V47_VIDEO_STORE).getAll();
+   req.onsuccess=()=>resolve(req.result||[]);
+   req.onerror=()=>reject(req.error);
+  });
+ }catch(e){return []}
+}
+async function mergeVideosV47(){
+ const saved=await getVideosV47();
+ if(!Array.isArray(window.wallpapers))window.wallpapers=[];
+ const ids=new Set(wallpapers.map(w=>w.id));
+ saved.forEach(v=>{
+  if(v.file && !String(v.img||'').startsWith('http')){
+    try{v.img=URL.createObjectURL(v.file)}catch(e){}
+  }
+  v.type='video';v.mediaType='video';
+  if(v.id && !ids.has(v.id)){wallpapers.unshift(v);ids.add(v.id)}
+ });
+}
+function isVideoV47(w){
+ return !!(w&&(w.type==='video'||w.mediaType==='video'||/\.(mp4|webm|ogg|mov)(\?|$)/i.test(w.img||'')));
+}
+function previewVideoUploadV45(event){
+ const file=event.target.files&&event.target.files[0];
+ if(!file)return;
+ v47SelectedVideoFile=file;
+ uploadVideoDataV45='';
+ if(v47VideoBlobUrl)URL.revokeObjectURL(v47VideoBlobUrl);
+ v47VideoBlobUrl=URL.createObjectURL(file);
+ const vp=document.getElementById('uploadVideoPreview');
+ const ip=document.getElementById('uploadPreview');
+ if(ip){ip.classList.add('hidden');ip.src=''}
+ if(vp){vp.src=v47VideoBlobUrl;vp.style.display='block';vp.load();vp.play().catch(()=>{});}
+ uploadImageData='';
+ showToast('Video selected');
+}
+async function fakeUploadVideoV45(){
+ const secretEl=document.getElementById('adminSecret');
+ if(!isAdminSaved()&&!adminUnlocked){
+  const secret=(secretEl&&secretEl.value||'').trim();
+  if(secret!==ADMIN_SECRET){showToast(t('wrongSecret')||'Wrong admin secret');return}
+  adminUnlocked=true;localStorage.setItem(LS.admin,'1');refreshAdminSecretUI();
+ }
+ const name=(document.getElementById('uploadName')?.value||'').trim()||'Video Wallpaper';
+ const cat=document.getElementById('uploadCategory')?.value||'anime';
+ const url=(document.getElementById('uploadUrl')?.value||'').trim();
+ const videoSrc=url||v47VideoBlobUrl;
+ if(!videoSrc){showToast('Choose video first');return}
+ const item={id:'vid_'+Date.now(),title:name,cat:cat,img:videoSrc,type:'video',mediaType:'video',views:0,likes:0,downloads:0,ratingTotal:0,ratingCount:0,featured:false,createdAt:Date.now(),localUpload:!url,urlUpload:!!url};
+ if(url){
+  try{
+   if(typeof saveWallpaperFirestoreV44==='function')await saveWallpaperFirestoreV44(item);
+   else if(fbReady&&db)await db.collection('wallpapers').doc(item.id).set(item,{merge:true});
+  }catch(e){console.warn(e)}
+ }else{
+  await saveVideoV47(item,v47SelectedVideoFile);
+ }
+ if(!Array.isArray(wallpapers))wallpapers=[];
+ wallpapers=[item,...wallpapers.filter(w=>w.id!==item.id)];
+ try{if(typeof mergeWallpapersV44==='function')mergeWallpapersV44(wallpapers)}catch(e){}
+ try{if(typeof mergePersistedWallpapersV42==='function')mergePersistedWallpapersV42(wallpapers)}catch(e){}
+ try{if(typeof buildWalls==='function')buildWalls(wallpapers)}catch(e){}
+ try{if(typeof renderLists==='function')renderLists()}catch(e){}
+ try{if(typeof renderAdminDashboard==='function')renderAdminDashboard()}catch(e){}
+ try{if(typeof renderTrendingPremium==='function')renderTrendingPremium()}catch(e){}
+ const n=document.getElementById('uploadName');if(n)n.value='';
+ const u=document.getElementById('uploadUrl');if(u)u.value='';
+ const vp=document.getElementById('uploadVideoPreview');if(vp){vp.pause();vp.src='';vp.style.display='none'}
+ v47SelectedVideoFile=null;v47VideoBlobUrl='';
+ closeModal('upload-modal');
+ showToast('Video added');
+ setTimeout(()=>openDetailModal(item.id),350);
+}
+const __wallCardV47=typeof wallCard==='function'?wallCard:null;
+if(__wallCardV47){
+ wallCard=function(w){
+  if(!isVideoV47(w))return __wallCardV47(w);
+  return `<div class="wall-card relative rounded-2xl overflow-hidden cursor-pointer bg-black border border-main" onclick="openDetailModal('${w.id}')">
+    <div class="aspect-[3/4] relative"><video src="${w.img}" muted loop playsinline preload="metadata"></video><span class="video-badge-v47"><i class="fas fa-play"></i></span></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none"></div>
+    <div class="absolute bottom-3 left-3 right-3 pointer-events-none">
+      <h4 class="text-xs font-bold text-white truncate">${w.title||'Video Wallpaper'}</h4>
+      <p class="text-[10px] text-zinc-300">${w.cat||'video'} • Video</p>
+    </div>
+  </div>`;
+ };
+}
+const __openDetailV47=typeof openDetailModal==='function'?openDetailModal:null;
+if(__openDetailV47){
+ openDetailModal=function(id){
+  const w=(typeof getWallpaper==='function'?getWallpaper(id):null)||(Array.isArray(wallpapers)?wallpapers.find(x=>x.id===id):null);
+  if(!w||!isVideoV47(w))return __openDetailV47(id);
+  currentDetailId=w.id;
+  const old=document.getElementById('detail-img-view');
+  if(old){
+   const vid=document.createElement('video');
+   vid.id='detail-img-view';
+   vid.className=old.className;
+   vid.src=w.img;
+   vid.controls=true;vid.autoplay=true;vid.loop=true;vid.muted=false;vid.playsInline=true;
+   old.replaceWith(vid);
+   setTimeout(()=>vid.play().catch(()=>{}),100);
+  }
+  const title=document.getElementById('detail-title');if(title)title.textContent=w.title||'Video Wallpaper';
+  const badge=document.getElementById('detail-featured-badge');if(badge)badge.classList.toggle('hidden',!w.featured);
+  const modal=document.getElementById('detail-modal');
+  if(modal){modal.classList.remove('hidden');setTimeout(()=>modal.classList.add('modal-open'),20);}
+  try{incrementView(w.id)}catch(e){}
+ };
+}
+window.addEventListener('load',async()=>{
+ await mergeVideosV47();
+ try{if(typeof buildWalls==='function')buildWalls(wallpapers)}catch(e){}
+ try{if(typeof renderLists==='function')renderLists()}catch(e){}
+});
+document.addEventListener('visibilitychange',async()=>{if(!document.hidden){await mergeVideosV47();try{buildWalls(wallpapers)}catch(e){}}});
+
+/* V51 Clean Video Hub */
+let v51Current=null, v51LastPage='videos';
+const v51DemoVideos=[
+{id:'demo_vid_1',title:'Night Drive',cat:'cars',img:'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=700&q=80',video:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',duration:'0:30',views:2100,likes:512,type:'video'},
+{id:'demo_vid_2',title:'Ocean Waves',cat:'nature',img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=80',video:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',duration:'0:25',views:1400,likes:320,type:'video'},
+{id:'demo_vid_3',title:'Cyberpunk City',cat:'cities',img:'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=700&q=80',video:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',duration:'0:20',views:3600,likes:780,type:'video'},
+{id:'demo_vid_4',title:'Mountain Road',cat:'nature',img:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=80',video:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',duration:'0:28',views:1200,likes:280,type:'video'},
+{id:'demo_vid_5',title:'Anime Fight',cat:'anime',img:'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=700&q=80',video:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',duration:'0:26',views:2500,likes:620,type:'video'},
+{id:'demo_vid_6',title:'Space Dream',cat:'abstract',img:'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=700&q=80',video:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',duration:'0:23',views:1100,likes:290,type:'video'}
+];
+function v51IsVideo(w){return !!(w&&(w.type==='video'||w.mediaType==='video'||String(w.id||'').startsWith('vid_')||/\.(mp4|webm|ogg|mov)(\?|$)/i.test(w.img||'')))}
+function v51Videos(){
+ const up=(Array.isArray(window.wallpapers)?wallpapers:[]).filter(v51IsVideo).map(w=>({
+  id:w.id,title:w.title||'Video Wallpaper',cat:w.cat||'cars',
+  img:w.thumb||w.poster||w.img,video:w.video||w.img,duration:w.duration||'0:20',
+  views:Number(w.views||0),likes:Number(w.likes||0),type:'video'
+ }));
+ const ids=new Set(up.map(v=>v.id));
+ return [...up,...v51DemoVideos.filter(v=>!ids.has(v.id))];
+}
+function v51Count(cat){const v=v51Videos();return cat==='all'?v.length:v.filter(x=>x.cat===cat).length}
+function v51CatCard(cat,title,img){return `<div class="v51-cat-card" onclick="v51OpenAll('${cat}')"><img src="${img}"><div class="v51-shade"></div><div class="v51-play"><i class="fas fa-play"></i></div><div class="v51-cat-info"><h4>${title}</h4><p>${v51Count(cat)} videos</p></div></div>`}
+function v51VideoCard(v){return `<div class="v51-video-card" onclick="v51OpenVideo('${v.id}','videos')"><img src="${v.img}" onerror="this.src='https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=700&q=80'"><div class="v51-shade"></div><div class="v51-play"><i class="fas fa-play"></i></div><span class="v51-duration">${v.duration||'0:20'}</span><div class="v51-video-info"><h4>${v.title}</h4><p class="cat">${v.cat}</p><p class="stats"><span><i class="fas fa-eye"></i> ${fmt(v.views||0)}</span><span><i class="fas fa-heart"></i> ${fmt(v.likes||0)}</span></p></div><button onclick="event.stopPropagation();v51Download('${v.id}')" class="v51-down"><i class="fas fa-download"></i></button></div>`}
+function v51ListCard(v){return `<div class="v51-list-card" onclick="v51OpenVideo('${v.id}','all-videos')"><div class="v51-list-thumb"><img src="${v.img}" onerror="this.src='https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=700&q=80'"><div class="v51-play" style="width:34px;height:34px;font-size:12px"><i class="fas fa-play"></i></div><span class="v51-duration" style="bottom:6px">${v.duration||'0:20'}</span></div><div><h4 class="text-sm font-bold text-main">${v.title}</h4><p class="text-xs mt-1" style="color:#f59e0b">${v.cat}</p><p class="text-[11px] text-muted mt-2"><i class="fas fa-eye"></i> ${fmt(v.views||0)} &nbsp; <i class="fas fa-heart"></i> ${fmt(v.likes||0)}</p></div><button onclick="event.stopPropagation();v51Download('${v.id}')" class="w-10 h-10 rounded-full bg-purple-neon text-white"><i class="fas fa-download"></i></button></div>`}
+function v51RenderVideos(cat='all'){
+ document.querySelectorAll('[id^="v51chip-"]').forEach(b=>b.classList.remove('active'));
+ const active=document.getElementById('v51chip-'+cat); if(active)active.classList.add('active');
+ const cats=document.getElementById('v51VideoCategories'), newer=document.getElementById('v51NewVideos'), trend=document.getElementById('v51TrendingVideos');
+ if(cats)cats.innerHTML=[
+  v51CatCard('all','All Videos','https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?auto=format&fit=crop&w=600&q=80'),
+  v51CatCard('cars','Cars','https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80'),
+  v51CatCard('nature','Nature','https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=600&q=80'),
+  v51CatCard('cities','City','https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=600&q=80'),
+  v51CatCard('anime','Anime','https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80'),
+  v51CatCard('abstract','Abstract','https://images.unsplash.com/photo-1557672172-298e090bd0f1?auto=format&fit=crop&w=600&q=80')
+ ].join('');
+ let list=v51Videos(); if(cat!=='all')list=list.filter(v=>v.cat===cat);
+ if(newer)newer.innerHTML=(list.length?list:v51Videos()).slice(0,3).map(v51VideoCard).join('');
+ if(trend)trend.innerHTML=[...(list.length?list:v51Videos())].sort((a,b)=>(b.views+b.likes*3)-(a.views+a.likes*3)).slice(0,3).map(v51VideoCard).join('');
+ v51RenderAll(cat);
+}
+function v51RenderAll(cat='all'){const box=document.getElementById('v51AllVideosList');if(!box)return;box.innerHTML=v51Videos().filter(v=>cat==='all'||v.cat===cat).map(v51ListCard).join('');document.querySelectorAll('[id^="v51all-"]').forEach(b=>b.classList.remove('active'));const a=document.getElementById('v51all-'+cat);if(a)a.classList.add('active')}
+function v51OpenAll(cat='all'){switchTab('all-videos');v51RenderAll(cat)}
+function v51OpenVideo(id,last='videos'){v51LastPage=last;const v=v51Videos().find(x=>x.id===id);if(!v)return;v51Current=v;switchTab('video-detail');const vid=document.getElementById('v51DetailVideo');if(vid){vid.poster=v.img;vid.src=v.video||v.img;vid.load()}document.getElementById('v51DetailTitle').textContent=v.title;document.getElementById('v51DetailViews').textContent=fmt(v.views||0);document.getElementById('v51DetailLikes').textContent=fmt(v.likes||0);document.getElementById('v51DetailCat').textContent=v.cat}
+function v51Download(id){const v=v51Videos().find(x=>x.id===id)||v51Current;if(!v)return;const a=document.createElement('a');a.href=v.video||v.img;a.download=(v.title||'video')+'.mp4';document.body.appendChild(a);a.click();a.remove();showToast('Video download started')}
+function v51DownloadCurrent(){if(v51Current)v51Download(v51Current.id)}
+function v51LikeCurrent(){if(!v51Current)return;v51Current.likes=(v51Current.likes||0)+1;document.getElementById('v51DetailLikes').textContent=fmt(v51Current.likes);showToast('Liked')}
+const __switchTabV51=typeof switchTab==='function'?switchTab:null;
+if(__switchTabV51){
+ switchTab=function(tab){
+  if(['videos','all-videos','video-detail'].includes(tab)){
+   document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));
+   const page=document.getElementById(tab+'-page'); if(page)page.classList.remove('hidden');
+   document.querySelectorAll('.tab').forEach(t=>{t.classList.remove('active-tab');t.classList.add('inactive-tab')});
+   const vt=document.getElementById('tab-videos'); if(vt){vt.classList.add('active-tab');vt.classList.remove('inactive-tab')}
+   setTimeout(()=>v51RenderVideos('all'),60);
+   return;
+  }
+  return __switchTabV51(tab);
+ }
+}
+window.addEventListener('load',()=>setTimeout(()=>v51RenderVideos('all'),700));
+
+</script>
+</body>
+</html>
